@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiếng Anh A2 – Ngữ pháp & Mẹo Thi</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --navy: #0f172a;
+    --blue: #2563eb;
+    --blue-light: #dbeafe;
+    --blue-mid: #93c5fd;
+    --green: #059669;
+    --green-light: #d1fae5;
+    --yellow: #d97706;
+    --yellow-light: #fef3c7;
+    --red: #dc2626;
+    --red-light: #fee2e2;
+    --purple: #7c3aed;
+    --purple-light: #ede9fe;
+    --orange: #ea580c;
+    --orange-light: #fff7ed;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-400: #94a3b8;
+    --gray-600: #475569;
+    --gray-800: #1e293b;
+    --white: #ffffff;
+    --radius: 12px;
+    --shadow: 0 4px 24px rgba(15,23,42,0.08);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background: var(--gray-50);
+    color: var(--navy);
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    padding: 0 24px;
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .logo { color: var(--white); font-weight: 800; font-size: 1.1rem; letter-spacing: -0.5px; }
+  .logo span { color: var(--blue-mid); }
+  nav { display: flex; gap: 4px; }
+  nav a {
+    color: var(--gray-400); text-decoration: none;
+    padding: 6px 14px; border-radius: 8px;
+    font-size: 0.85rem; font-weight: 500; transition: all .2s;
+    cursor: pointer;
+  }
+  nav a:hover, nav a.active { background: rgba(255,255,255,0.1); color: var(--white); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #1e3a8a 100%);
+    color: var(--white); text-align: center;
+    padding: 64px 24px 80px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(37,99,235,0.3);
+    border: 1px solid rgba(147,197,253,0.3);
+    color: var(--blue-mid); border-radius: 99px;
+    padding: 4px 16px; font-size: 0.8rem; font-weight: 600;
+    margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
+  .hero h1 em { color: var(--blue-mid); font-style: normal; }
+  .hero p { color: rgba(255,255,255,0.7); font-size: 1.05rem; max-width: 520px; margin: 0 auto 32px; }
+  .hero-stats {
+    display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat strong { display: block; font-size: 1.8rem; font-weight: 800; color: var(--blue-mid); }
+  .stat span { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 48px 24px; }
+  .section-title {
+    font-size: 1.5rem; font-weight: 800; color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .section-sub { color: var(--gray-600); margin-bottom: 32px; font-size: 0.95rem; }
+
+  /* ── TABS ── */
+  .tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+  .tab-btn {
+    padding: 8px 20px; border-radius: 99px; border: 2px solid var(--gray-200);
+    background: var(--white); cursor: pointer; font-family: inherit;
+    font-size: 0.88rem; font-weight: 600; color: var(--gray-600);
+    transition: all .2s;
+  }
+  .tab-btn:hover { border-color: var(--blue); color: var(--blue); }
+  .tab-btn.active { background: var(--blue); border-color: var(--blue); color: var(--white); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ── GRAMMAR CARD ── */
+  .grammar-card {
+    background: var(--white); border-radius: var(--radius);
+    box-shadow: var(--shadow); margin-bottom: 24px;
+    overflow: hidden; border: 1px solid var(--gray-200);
+  }
+  .card-header {
+    padding: 20px 24px; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid transparent; transition: all .2s;
+  }
+  .card-header:hover { background: var(--gray-50); }
+  .card-header.open { border-bottom-color: var(--gray-200); }
+  .card-title { font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 12px; }
+  .card-tag {
+    font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 99px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .tag-blue { background: var(--blue-light); color: var(--blue); }
+  .tag-green { background: var(--green-light); color: var(--green); }
+  .tag-yellow { background: var(--yellow-light); color: var(--yellow); }
+  .tag-purple { background: var(--purple-light); color: var(--purple); }
+  .tag-red { background: var(--red-light); color: var(--red); }
+  .tag-orange { background: var(--orange-light); color: var(--orange); }
+  .arrow { font-size: 1.2rem; transition: transform .3s; color: var(--gray-400); }
+  .arrow.open { transform: rotate(180deg); }
+  .card-body { padding: 24px; display: none; }
+  .card-body.open { display: block; }
+
+  /* ── FORMULA BOX ── */
+  .formula-box {
+    background: var(--navy); color: var(--white);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 20px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; line-height: 1.8;
+  }
+  .formula-box .label { color: var(--blue-mid); font-weight: 600; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; display: block; }
+  .fml-positive { color: #86efac; }
+  .fml-negative { color: #fca5a5; }
+  .fml-question { color: #fde68a; }
+
+  /* ── SIGNAL WORDS ── */
+  .signals {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;
+  }
+  .signal-word {
+    background: var(--yellow-light); color: var(--yellow);
+    border-radius: 6px; padding: 4px 12px;
+    font-size: 0.82rem; font-weight: 600; font-family: 'JetBrains Mono', monospace;
+  }
+  .signal-word.sig-green { background: var(--green-light); color: var(--green); }
+  .signal-word.sig-blue { background: var(--blue-light); color: var(--blue); }
+  .signal-word.sig-purple { background: var(--purple-light); color: var(--purple); }
+  .signal-word.sig-red { background: var(--red-light); color: var(--red); }
+
+  /* ── EXAMPLE TABLE ── */
+  .ex-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+  .ex-table th {
+    background: var(--gray-100); padding: 10px 14px;
+    font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.5px; color: var(--gray-600); text-align: left;
+  }
+  .ex-table td { padding: 10px 14px; border-bottom: 1px solid var(--gray-100); font-size: 0.92rem; }
+  .ex-table tr:last-child td { border-bottom: none; }
+  .ex-pos { color: var(--green); font-weight: 600; }
+  .ex-neg { color: var(--red); font-weight: 600; }
+  .ex-q { color: var(--blue); font-weight: 600; }
+  .highlight-verb { background: #fef08a; border-radius: 4px; padding: 1px 4px; color: #92400e; font-weight: 700; }
+  .highlight-sub { background: #dbeafe; border-radius: 4px; padding: 1px 4px; color: #1d4ed8; font-weight: 700; }
+  .vn { color: var(--gray-600); font-size: 0.82rem; font-style: italic; }
+
+  /* ── USAGE BOX ── */
+  .usage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .usage-item { background: var(--gray-50); border-radius: 8px; padding: 14px; border-left: 3px solid var(--blue); }
+  .usage-item strong { font-size: 0.82rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px; }
+  .usage-item span { font-size: 0.88rem; color: var(--gray-600); }
+
+  /* ── EXERCISE ── */
+  .exercise-box {
+    background: var(--purple-light); border-radius: 10px; padding: 20px; margin-top: 20px;
+  }
+  .exercise-box h4 { color: var(--purple); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; }
+  .ex-item { margin-bottom: 10px; font-size: 0.92rem; }
+  .ex-item input {
+    border: 2px solid #c4b5fd; border-radius: 6px; padding: 2px 10px;
+    font-family: inherit; font-size: 0.9rem; width: 140px; outline: none;
+    background: var(--white); transition: border .2s;
+  }
+  .ex-item input:focus { border-color: var(--purple); }
+  .check-btn {
+    margin-top: 12px; padding: 8px 20px; background: var(--purple);
+    color: var(--white); border: none; border-radius: 8px; cursor: pointer;
+    font-family: inherit; font-size: 0.88rem; font-weight: 600; transition: all .2s;
+  }
+  .check-btn:hover { background: #6d28d9; transform: translateY(-1px); }
+  .answer-reveal { margin-top: 10px; padding: 12px 16px; background: var(--white); border-radius: 8px; display: none; font-size: 0.88rem; }
+  .answer-reveal.show { display: block; }
+  .answer-correct { color: var(--green); font-weight: 600; }
+
+  /* ── TIPS PAGE ── */
+  .tips-section-title {
+    font-size: 1.15rem; font-weight: 800; color: var(--navy);
+    margin: 36px 0 16px; padding: 12px 20px;
+    background: var(--navy); color: var(--white);
+    border-radius: 10px; display: flex; align-items: center; gap: 10px;
+  }
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .tip-card {
+    background: var(--white); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 24px;
+    border: 1px solid var(--gray-200); position: relative; overflow: hidden;
+  }
+  .tip-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  }
+  .tip-card.t-blue::before { background: var(--blue); }
+  .tip-card.t-green::before { background: var(--green); }
+  .tip-card.t-yellow::before { background: var(--yellow); }
+  .tip-card.t-purple::before { background: var(--purple); }
+  .tip-card.t-red::before { background: var(--red); }
+  .tip-card.t-orange::before { background: var(--orange); }
+  .tip-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+  .tip-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
+  .tip-card p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.7; }
+  .tip-list { list-style: none; margin-top: 10px; }
+  .tip-list li { font-size: 0.88rem; color: var(--gray-600); padding: 5px 0 5px 20px; position: relative; border-bottom: 1px dashed var(--gray-100); }
+  .tip-list li:last-child { border-bottom: none; }
+  .tip-list li::before { content: '→'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
+
+  /* ── TRICK BOX (highlight trick) ── */
+  .trick-box {
+    border-radius: 10px; padding: 18px 20px; margin-bottom: 16px;
+    border-left: 4px solid;
+  }
+  .trick-box.tb-red { background: var(--red-light); border-color: var(--red); }
+  .trick-box.tb-yellow { background: var(--yellow-light); border-color: var(--yellow); }
+  .trick-box.tb-green { background: var(--green-light); border-color: var(--green); }
+  .trick-box.tb-blue { background: var(--blue-light); border-color: var(--blue); }
+  .trick-box.tb-purple { background: var(--purple-light); border-color: var(--purple); }
+  .trick-box.tb-orange { background: var(--orange-light); border-color: var(--orange); }
+  .trick-box h4 { font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .trick-box.tb-red h4 { color: var(--red); }
+  .trick-box.tb-yellow h4 { color: var(--yellow); }
+  .trick-box.tb-green h4 { color: var(--green); }
+  .trick-box.tb-blue h4 { color: var(--blue); }
+  .trick-box.tb-purple h4 { color: var(--purple); }
+  .trick-box.tb-orange h4 { color: var(--orange); }
+  .trick-box ul { list-style: none; }
+  .trick-box ul li { font-size: 0.9rem; color: var(--gray-800); padding: 4px 0 4px 18px; position: relative; }
+  .trick-box ul li::before { content: '✦'; position: absolute; left: 0; font-size: 0.7rem; top: 6px; }
+  .trick-box.tb-red ul li::before { color: var(--red); }
+  .trick-box.tb-yellow ul li::before { color: var(--yellow); }
+  .trick-box.tb-green ul li::before { color: var(--green); }
+  .trick-box.tb-blue ul li::before { color: var(--blue); }
+  .trick-box.tb-purple ul li::before { color: var(--purple); }
+  .trick-box.tb-orange ul li::before { color: var(--orange); }
+
+  /* Pronunciation table */
+  .pron-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px; }
+  .pron-card { border-radius: 10px; padding: 16px; border: 1px solid var(--gray-200); background: var(--white); }
+  .pron-card h4 { font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+  .pron-row { display: flex; align-items: center; gap: 10px; padding: 5px 0; border-bottom: 1px dashed var(--gray-100); font-size: 0.88rem; }
+  .pron-row:last-child { border-bottom: none; }
+  .pron-sound { background: var(--navy); color: var(--white); border-radius: 6px; padding: 2px 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; min-width: 40px; text-align: center; }
+  .pron-ends { font-weight: 700; color: var(--navy); font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
+  .pron-ex { color: var(--gray-600); font-size: 0.8rem; }
+
+  /* Word type suffix table */
+  .suffix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .suffix-card { border-radius: 10px; padding: 14px; }
+  .suffix-card.sc-noun { background: #dbeafe; }
+  .suffix-card.sc-adj { background: #d1fae5; }
+  .suffix-card.sc-adv { background: #fef3c7; }
+  .suffix-card.sc-verb { background: #ede9fe; }
+  .suffix-card h4 { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .suffix-card.sc-noun h4 { color: var(--blue); }
+  .suffix-card.sc-adj h4 { color: var(--green); }
+  .suffix-card.sc-adv h4 { color: var(--yellow); }
+  .suffix-card.sc-verb h4 { color: var(--purple); }
+  .suffix-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .suffix-tag { border-radius: 5px; padding: 2px 9px; font-size: 0.78rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .sc-noun .suffix-tag { background: var(--blue); color: white; }
+  .sc-adj .suffix-tag { background: var(--green); color: white; }
+  .sc-adv .suffix-tag { background: var(--yellow); color: white; }
+  .sc-verb .suffix-tag { background: var(--purple); color: white; }
+
+  /* Banner alert */
+  .exam-banner {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: white; border-radius: 12px; padding: 20px 24px;
+    margin-bottom: 28px; display: flex; align-items: center; gap: 16px;
+  }
+  .exam-banner .eb-icon { font-size: 2rem; }
+  .exam-banner h3 { font-size: 1rem; font-weight: 800; margin-bottom: 4px; }
+  .exam-banner p { font-size: 0.88rem; opacity: 0.9; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); color: rgba(255,255,255,0.5);
+    text-align: center; padding: 24px; font-size: 0.82rem;
+  }
+  footer span { color: var(--blue-mid); }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width: 640px) {
+    nav a span { display: none; }
+    .hero { padding: 40px 16px 56px; }
+    .container { padding: 32px 16px; }
+    .pron-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Tiếng Anh <span>A2</span></div>
+  <nav>
+    <a href="#" class="active" onclick="showPage('grammar',this)">📖 <span>Ngữ pháp</span></a>
+    <a href="#" onclick="showPage('tips',this)">🎯 <span>Mẹo thi</span></a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-badge">Trình độ A2 · Elementary</div>
+  <h1>Ngữ Pháp & Mẹo Thi<br><em>Tiếng Anh A2</em></h1>
+  <p>Công thức đầy đủ, ví dụ rõ ràng, chiến thuật làm bài thi – tất cả trong một trang.</p>
+  <div class="hero-stats">
+    <div class="stat"><strong>12</strong><span>Chủ điểm ngữ pháp</span></div>
+    <div class="stat"><strong>30+</strong><span>Mẹo làm bài thi</span></div>
+    <div class="stat"><strong>5</strong><span>Phần bài tập</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════ GRAMMAR PAGE ═══════════════ -->
+<div id="page-grammar" class="container">
+  <div class="section-title">📖 Ngữ pháp Tiếng Anh A2</div>
+  <div class="section-sub">Nhấn vào từng chủ điểm để xem công thức, ví dụ và bài tập</div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('tenses',this)">Các thì</button>
+    <button class="tab-btn" onclick="showTab('modal',this)">Động từ khuyết thiếu</button>
+    <button class="tab-btn" onclick="showTab('sentence',this)">Cấu trúc câu</button>
+    <button class="tab-btn" onclick="showTab('parts',this)">Từ loại</button>
+  </div>
+
+  <!-- TAB: TENSES -->
+  <div id="tab-tenses" class="tab-content active">
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-blue">Thì 1</span> Thì Hiện Tại Đơn – Present Simple</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="formula-box">
+          <span class="label">Công thức</span>
+          <div class="fml-positive">✅ (+) S + V(s/es) + O</div>
+          <div class="fml-negative">❌ (−) S + do/does + not + V + O</div>
+          <div class="fml-question">❓ (?) Do/Does + S + V + O?</div>
+        </div>
+        <div class="usage-grid">
+          <div class="usage-item"><strong>Thói quen</strong><span>Việc làm lặp đi lặp lại hàng ngày</span></div>
+          <div class="usage-item"><strong>Sự thật</strong><span>Điều luôn đúng, không thay đổi</span></div>
+          <div class="usage-item"><strong>Lịch trình</strong><span>Giờ tàu, máy bay, lớp học cố định</span></div>
+        </div>
+        <p style="font-size:.85rem;font-weight:700;color:var(--yellow);margin-bottom:8px;">⚡ Dấu hiệu nhận biết:</p>
+        <div class="signals">
+          <span class="signal-word">always</span><span class="signal-word">usually</span>
+          <span class="signal-word">often</span><span class="signal-word">sometimes</span>
+          <span class="signal-word">never</span><span class="signal-word">every day</span>
+          <span class="signal-word">on Mondays</span>
+        </div>
+        <table class="ex-table">
+          <tr><th>Loại câu</th><th>Ví dụ tiếng Anh</th><th>Tiếng Việt</th></tr>
+          <tr><td>Khẳng định</td><td class="ex-pos"><span class="highlight-sub">She</span> <span class="highlight-verb">goes</span> to school every day.</td><td class="vn">Cô ấy đi học mỗi ngày.</td></tr>
+          <tr><td>Phủ định</td><td class="ex-neg"><span class="highlight-sub">He</span> <span class="highlight-verb">does not eat</span> meat.</td><td class="vn">Anh ấy không ăn thịt.</td></tr>
+          <tr><td>Nghi vấn</td><td class="ex-q"><span class="highlight-verb">Do</span> <span class="highlight-sub">you</span> <span class="highlight-verb">like</span> coffee?</td><td class="vn">Bạn có thích cà phê không?</td></tr>
+          <tr><td>Sự thật</td><td class="ex-pos">The sun <span class="highlight-verb">rises</span> in the East.</td><td class="vn">Mặt trời mọc ở phía Đông.</td></tr>
+        </table>
+        <p style="font-size:.82rem;color:var(--gray-600);margin-top:8px;">💡 <strong>Chú ý:</strong> Thêm <strong>s/es</strong> vào động từ khi chủ ngữ là he/she/it. go→goes · watch→watches · study→studies</p>
+        <div class="exercise-box">
+          <h4>✏️ Bài tập nhỏ – Điền vào chỗ trống</h4>
+          <div class="ex-item">1. She ______ (study) English every night. <input type="text" id="q1" placeholder="..."></div>
+          <div class="ex-item">2. They ______ (not/like) cold weather. <input type="text" id="q2" placeholder="..."></div>
+          <div class="ex-item">3. ______ he ______ (work) on weekends? <input type="text" id="q3" placeholder="..."></div>
+          <button class="check-btn" onclick="checkPS()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-ps"><div class="answer-correct">1. studies &nbsp;|&nbsp; 2. don't like &nbsp;|&nbsp; 3. Does / work</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-green">Thì 2</span> Thì Hiện Tại Tiếp Diễn – Present Continuous</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="formula-box">
+          <span class="label">Công thức</span>
+          <div class="fml-positive">✅ (+) S + am/is/are + V-ing + O</div>
+          <div class="fml-negative">❌ (−) S + am/is/are + not + V-ing + O</div>
+          <div class="fml-question">❓ (?) Am/Is/Are + S + V-ing + O?</div>
+        </div>
+        <div class="usage-grid">
+          <div class="usage-item"><strong>Đang xảy ra</strong><span>Hành động đang diễn ra ngay lúc nói</span></div>
+          <div class="usage-item"><strong>Tạm thời</strong><span>Việc đang làm trong giai đoạn này</span></div>
+          <div class="usage-item"><strong>Kế hoạch</strong><span>Kế hoạch chắc chắn trong tương lai gần</span></div>
+        </div>
+        <div class="signals">
+          <span class="signal-word">now</span><span class="signal-word">right now</span>
+          <span class="signal-word">at the moment</span><span class="signal-word">look!</span>
+          <span class="signal-word">listen!</span><span class="signal-word">this week</span>
+        </div>
+        <table class="ex-table">
+          <tr><th>Loại câu</th><th>Ví dụ tiếng Anh</th><th>Tiếng Việt</th></tr>
+          <tr><td>Khẳng định</td><td class="ex-pos"><span class="highlight-sub">I</span> <span class="highlight-verb">am studying</span> right now.</td><td class="vn">Tôi đang học bài ngay lúc này.</td></tr>
+          <tr><td>Phủ định</td><td class="ex-neg"><span class="highlight-sub">She</span> <span class="highlight-verb">is not working</span> today.</td><td class="vn">Hôm nay cô ấy không làm việc.</td></tr>
+          <tr><td>Nghi vấn</td><td class="ex-q"><span class="highlight-verb">Are</span> <span class="highlight-sub">they</span> <span class="highlight-verb">watching</span> TV?</td><td class="vn">Họ có đang xem TV không?</td></tr>
+          <tr><td>Kế hoạch</td><td class="ex-pos">We <span class="highlight-verb">are meeting</span> tomorrow.</td><td class="vn">Chúng tôi sẽ gặp nhau vào ngày mai.</td></tr>
+        </table>
+        <p style="font-size:.82rem;color:var(--gray-600);margin-top:8px;">💡 <strong>Cách thêm -ing:</strong> run→running · swim→swimming (gấp đôi phụ âm cuối) · come→coming (bỏ e) · study→studying</p>
+        <div class="exercise-box">
+          <h4>✏️ Bài tập nhỏ</h4>
+          <div class="ex-item">1. Look! The dog ______ (run) in the garden. <input type="text" id="q4" placeholder="..."></div>
+          <div class="ex-item">2. ______ you ______ (eat) lunch now? <input type="text" id="q5" placeholder="..."></div>
+          <button class="check-btn" onclick="checkPC()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-pc"><div class="answer-correct">1. is running &nbsp;|&nbsp; 2. Are / eating</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-yellow">Thì 3</span> Thì Quá Khứ Đơn – Past Simple</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="formula-box">
+          <span class="label">Công thức</span>
+          <div class="fml-positive">✅ (+) S + V-ed / V2 + O</div>
+          <div class="fml-negative">❌ (−) S + did not + V + O</div>
+          <div class="fml-question">❓ (?) Did + S + V + O?</div>
+        </div>
+        <div class="usage-grid">
+          <div class="usage-item"><strong>Đã xong</strong><span>Hành động hoàn thành trong quá khứ</span></div>
+          <div class="usage-item"><strong>Thời gian xác định</strong><span>Biết rõ khi nào xảy ra</span></div>
+        </div>
+        <div class="signals">
+          <span class="signal-word">yesterday</span><span class="signal-word">last week</span>
+          <span class="signal-word">last night</span><span class="signal-word">ago</span>
+          <span class="signal-word">in 2020</span><span class="signal-word">when I was...</span>
+        </div>
+        <table class="ex-table">
+          <tr><th>Loại câu</th><th>Ví dụ tiếng Anh</th><th>Tiếng Việt</th></tr>
+          <tr><td>Khẳng định (đều)</td><td class="ex-pos"><span class="highlight-sub">I</span> <span class="highlight-verb">watched</span> a movie last night.</td><td class="vn">Tôi đã xem phim tối qua.</td></tr>
+          <tr><td>Khẳng định (bất quy tắc)</td><td class="ex-pos"><span class="highlight-sub">She</span> <span class="highlight-verb">went</span> to Paris last year.</td><td class="vn">Cô ấy đã đến Paris năm ngoái.</td></tr>
+          <tr><td>Phủ định</td><td class="ex-neg"><span class="highlight-sub">He</span> <span class="highlight-verb">didn't call</span> me yesterday.</td><td class="vn">Anh ấy không gọi cho tôi hôm qua.</td></tr>
+          <tr><td>Nghi vấn</td><td class="ex-q"><span class="highlight-verb">Did</span> <span class="highlight-sub">you</span> <span class="highlight-verb">eat</span> breakfast?</td><td class="vn">Bạn có ăn sáng không?</td></tr>
+        </table>
+        <div style="background:var(--yellow-light);border-radius:8px;padding:14px;margin-top:12px;font-size:.87rem;">
+          <strong>📋 Động từ bất quy tắc thường gặp:</strong><br><br>
+          go→went · come→came · eat→ate · see→saw · take→took · buy→bought · have→had · make→made · give→gave · know→knew · run→ran · get→got · say→said · find→found · think→thought
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-purple">Thì 4</span> Tương Lai – Will & Going To</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="formula-box">
+          <span class="label">WILL – Quyết định tức thì / Dự đoán</span>
+          <div class="fml-positive">✅ S + will + V + O</div>
+          <div class="fml-negative">❌ S + will not (won't) + V + O</div>
+          <div class="fml-question">❓ Will + S + V + O?</div>
+        </div>
+        <div class="formula-box" style="margin-top:12px;">
+          <span class="label">GOING TO – Kế hoạch đã định / Dự đoán có bằng chứng</span>
+          <div class="fml-positive">✅ S + am/is/are + going to + V + O</div>
+        </div>
+        <table class="ex-table" style="margin-top:16px;">
+          <tr><th>Loại</th><th>Ví dụ</th><th>Tiếng Việt</th></tr>
+          <tr><td>Will – quyết định</td><td class="ex-pos">I <span class="highlight-verb">will help</span> you now.</td><td class="vn">Tôi sẽ giúp bạn ngay.</td></tr>
+          <tr><td>Will – dự đoán</td><td class="ex-pos">It <span class="highlight-verb">will rain</span> tomorrow.</td><td class="vn">Ngày mai trời sẽ mưa.</td></tr>
+          <tr><td>Going to – kế hoạch</td><td class="ex-pos">We <span class="highlight-verb">are going to visit</span> Hà Nội.</td><td class="vn">Chúng tôi dự định thăm Hà Nội.</td></tr>
+          <tr><td>Will – phủ định</td><td class="ex-neg">She <span class="highlight-verb">won't come</span> to the party.</td><td class="vn">Cô ấy sẽ không đến tiệc.</td></tr>
+        </table>
+        <div class="signals" style="margin-top:12px;">
+          <span class="signal-word">tomorrow</span><span class="signal-word">next week</span>
+          <span class="signal-word">in the future</span><span class="signal-word">soon</span>
+          <span class="signal-word">I think...</span><span class="signal-word">I plan to...</span>
+        </div>
+        <div class="exercise-box">
+          <h4>✏️ Bài tập nhỏ</h4>
+          <div class="ex-item">1. Look at those clouds! It ______ (rain) soon. <input type="text" id="q6" placeholder="..."></div>
+          <div class="ex-item">2. I ______ (visit) my grandmother next weekend. (kế hoạch) <input type="text" id="q7" placeholder="..."></div>
+          <button class="check-btn" onclick="checkFuture()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-future"><div class="answer-correct">1. is going to rain &nbsp;|&nbsp; 2. am going to visit</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-red">Thì 5</span> Thì Hiện Tại Hoàn Thành – Present Perfect</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="formula-box">
+          <span class="label">Công thức</span>
+          <div class="fml-positive">✅ S + have/has + V3/V-ed + O</div>
+          <div class="fml-negative">❌ S + have/has + not + V3/V-ed + O</div>
+          <div class="fml-question">❓ Have/Has + S + V3/V-ed + O?</div>
+        </div>
+        <div class="usage-grid">
+          <div class="usage-item"><strong>Kinh nghiệm</strong><span>Đã từng trải qua chưa</span></div>
+          <div class="usage-item"><strong>Vừa xong</strong><span>Mới hoàn thành xong</span></div>
+          <div class="usage-item"><strong>Kéo dài</strong><span>Bắt đầu từ quá khứ, còn đến hiện tại</span></div>
+        </div>
+        <div class="signals">
+          <span class="signal-word">already</span><span class="signal-word">yet</span>
+          <span class="signal-word">ever</span><span class="signal-word">never</span>
+          <span class="signal-word">just</span><span class="signal-word">since</span>
+          <span class="signal-word">for</span>
+        </div>
+        <table class="ex-table">
+          <tr><th>Loại câu</th><th>Ví dụ</th><th>Tiếng Việt</th></tr>
+          <tr><td>Kinh nghiệm</td><td class="ex-pos">I <span class="highlight-verb">have visited</span> Ha Long Bay.</td><td class="vn">Tôi đã từng thăm vịnh Hạ Long.</td></tr>
+          <tr><td>Vừa xong</td><td class="ex-pos">She <span class="highlight-verb">has just finished</span> her homework.</td><td class="vn">Cô ấy vừa làm xong bài tập.</td></tr>
+          <tr><td>Phủ định</td><td class="ex-neg">He <span class="highlight-verb">hasn't eaten</span> yet.</td><td class="vn">Anh ấy chưa ăn.</td></tr>
+          <tr><td>Nghi vấn</td><td class="ex-q"><span class="highlight-verb">Have</span> you <span class="highlight-verb">ever been</span> to Japan?</td><td class="vn">Bạn đã từng đến Nhật chưa?</td></tr>
+        </table>
+        <div style="background:var(--red-light);border-radius:8px;padding:14px;margin-top:12px;font-size:.87rem;">
+          <strong>💡 SINCE vs FOR:</strong><br><br>
+          <strong>SINCE</strong> + điểm thời gian cụ thể → since 2020, since Monday, since I was young<br>
+          <strong>FOR</strong> + khoảng thời gian → for 3 years, for two weeks, for a long time
+        </div>
+        <div class="exercise-box">
+          <h4>✏️ Bài tập nhỏ</h4>
+          <div class="ex-item">1. I ______ (never/try) Vietnamese food before. <input type="text" id="q8" placeholder="..."></div>
+          <div class="ex-item">2. She has lived here ______ 2015. (since/for) <input type="text" id="q9" placeholder="..."></div>
+          <button class="check-btn" onclick="checkPP()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-pp"><div class="answer-correct">1. have never tried &nbsp;|&nbsp; 2. since</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end tab-tenses -->
+
+  <!-- TAB: MODAL VERBS -->
+  <div id="tab-modal" class="tab-content">
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-blue">Can / Can't</span> Khả năng & Xin phép</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="formula-box">
+          <div class="fml-positive">✅ S + can + V (nguyên thể)</div>
+          <div class="fml-negative">❌ S + cannot (can't) + V</div>
+          <div class="fml-question">❓ Can + S + V?</div>
+        </div>
+        <table class="ex-table">
+          <tr><th>Dùng để</th><th>Ví dụ</th><th>Tiếng Việt</th></tr>
+          <tr><td>Khả năng</td><td class="ex-pos">She <span class="highlight-verb">can swim</span> very well.</td><td class="vn">Cô ấy có thể bơi rất giỏi.</td></tr>
+          <tr><td>Không thể</td><td class="ex-neg">I <span class="highlight-verb">can't drive</span> a car.</td><td class="vn">Tôi không biết lái xe.</td></tr>
+          <tr><td>Xin phép</td><td class="ex-q"><span class="highlight-verb">Can</span> I use your phone?</td><td class="vn">Tôi có thể dùng điện thoại bạn không?</td></tr>
+          <tr><td>Yêu cầu</td><td class="ex-q"><span class="highlight-verb">Can</span> you help me, please?</td><td class="vn">Bạn có thể giúp tôi được không?</td></tr>
+        </table>
+        <div class="exercise-box">
+          <h4>✏️ Bài tập nhỏ</h4>
+          <div class="ex-item">1. ______ you speak French? <input type="text" id="q10" placeholder="..."></div>
+          <div class="ex-item">2. He ______ come to the party. (không thể) <input type="text" id="q11" placeholder="..."></div>
+          <button class="check-btn" onclick="checkModal1()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-modal1"><div class="answer-correct">1. Can &nbsp;|&nbsp; 2. can't / cannot</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-green">Must / Have to</span> Nghĩa vụ & Bắt buộc</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="formula-box">
+          <div class="fml-positive">✅ must + V → bắt buộc (do bản thân quyết định)</div>
+          <div class="fml-positive">✅ have to + V → bắt buộc (do hoàn cảnh bên ngoài)</div>
+          <div class="fml-negative">❌ mustn't + V → bị cấm hoàn toàn</div>
+          <div class="fml-negative">❌ don't have to + V → không cần phải (nhưng được phép)</div>
+        </div>
+        <table class="ex-table">
+          <tr><th>Ví dụ</th><th>Tiếng Việt</th></tr>
+          <tr><td class="ex-pos">You <span class="highlight-verb">must</span> study hard.</td><td class="vn">Bạn phải học chăm chỉ.</td></tr>
+          <tr><td class="ex-pos">I <span class="highlight-verb">have to</span> wake up at 6am.</td><td class="vn">Tôi phải dậy lúc 6 giờ sáng.</td></tr>
+          <tr><td class="ex-neg">You <span class="highlight-verb">mustn't</span> smoke here.</td><td class="vn">Bạn không được hút thuốc ở đây.</td></tr>
+          <tr><td class="ex-neg">You <span class="highlight-verb">don't have to</span> come early.</td><td class="vn">Bạn không cần đến sớm.</td></tr>
+        </table>
+        <div class="exercise-box">
+          <h4>✏️ Bài tập nhỏ</h4>
+          <div class="ex-item">1. Students ______ wear uniform at this school. (bắt buộc) <input type="text" id="q12" placeholder="..."></div>
+          <div class="ex-item">2. You ______ park here. It's forbidden. (bị cấm) <input type="text" id="q13" placeholder="..."></div>
+          <button class="check-btn" onclick="checkModal2()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-modal2"><div class="answer-correct">1. have to / must &nbsp;|&nbsp; 2. mustn't</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-yellow">Should / Shouldn't</span> Lời khuyên</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="formula-box">
+          <div class="fml-positive">✅ S + should + V → nên làm</div>
+          <div class="fml-negative">❌ S + shouldn't + V → không nên làm</div>
+        </div>
+        <table class="ex-table">
+          <tr><th>Ví dụ</th><th>Tiếng Việt</th></tr>
+          <tr><td class="ex-pos">You <span class="highlight-verb">should</span> drink more water.</td><td class="vn">Bạn nên uống nhiều nước hơn.</td></tr>
+          <tr><td class="ex-neg">You <span class="highlight-verb">shouldn't</span> eat too much sugar.</td><td class="vn">Bạn không nên ăn quá nhiều đường.</td></tr>
+          <tr><td class="ex-pos">She <span class="highlight-verb">should</span> see a doctor.</td><td class="vn">Cô ấy nên đi khám bác sĩ.</td></tr>
+        </table>
+        <div class="exercise-box">
+          <h4>✏️ Bài tập nhỏ</h4>
+          <div class="ex-item">1. You look tired. You ______ get more sleep. <input type="text" id="q14" placeholder="..."></div>
+          <div class="ex-item">2. He ______ spend all his money on games. <input type="text" id="q15" placeholder="..."></div>
+          <button class="check-btn" onclick="checkModal3()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-modal3"><div class="answer-correct">1. should &nbsp;|&nbsp; 2. shouldn't</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-purple">Would like</span> Mong muốn lịch sự</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="formula-box">
+          <div class="fml-positive">✅ I would like + to + V &nbsp;(lịch sự hơn "I want")</div>
+          <div class="fml-positive">✅ Would you like + to + V? &nbsp;(mời lịch sự)</div>
+        </div>
+        <table class="ex-table">
+          <tr><th>Ví dụ</th><th>Tiếng Việt</th></tr>
+          <tr><td class="ex-pos">I <span class="highlight-verb">would like to</span> order a coffee.</td><td class="vn">Tôi muốn gọi một ly cà phê.</td></tr>
+          <tr><td class="ex-q"><span class="highlight-verb">Would you like</span> some tea?</td><td class="vn">Bạn có muốn uống trà không?</td></tr>
+          <tr><td class="ex-pos">I'd like a window seat, please.</td><td class="vn">Cho tôi chỗ ngồi bên cửa sổ.</td></tr>
+        </table>
+        <div class="exercise-box">
+          <h4>✏️ Bài tập nhỏ</h4>
+          <div class="ex-item">1. ______ you like to dance? <input type="text" id="q16" placeholder="..."></div>
+          <div class="ex-item">2. I ______ like to book a table for two. <input type="text" id="q17" placeholder="..."></div>
+          <button class="check-btn" onclick="checkModal4()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-modal4"><div class="answer-correct">1. Would &nbsp;|&nbsp; 2. would / 'd</div></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- end tab-modal -->
+
+  <!-- TAB: SENTENCE STRUCTURES -->
+  <div id="tab-sentence" class="tab-content">
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-blue">Câu so sánh</span> Comparatives & Superlatives</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="formula-box">
+          <span class="label">So sánh hơn (Comparative)</span>
+          <div class="fml-positive">✅ S + be + adj-er + than + O &nbsp;(tính từ ngắn)</div>
+          <div class="fml-positive">✅ S + be + more + adj + than + O &nbsp;(tính từ dài)</div>
+        </div>
+        <div class="formula-box" style="margin-top:10px;">
+          <span class="label">So sánh nhất (Superlative)</span>
+          <div class="fml-positive">✅ S + be + the + adj-est &nbsp;(tính từ ngắn)</div>
+          <div class="fml-positive">✅ S + be + the most + adj &nbsp;(tính từ dài)</div>
+        </div>
+        <table class="ex-table" style="margin-top:16px;">
+          <tr><th>Tính từ</th><th>So sánh hơn</th><th>So sánh nhất</th></tr>
+          <tr><td>tall</td><td class="ex-pos">taller</td><td class="ex-pos">the tallest</td></tr>
+          <tr><td>big</td><td class="ex-pos">bigger</td><td class="ex-pos">the biggest</td></tr>
+          <tr><td>beautiful</td><td class="ex-pos">more beautiful</td><td class="ex-pos">the most beautiful</td></tr>
+          <tr><td>good</td><td class="ex-pos">better</td><td class="ex-pos">the best</td></tr>
+          <tr><td>bad</td><td class="ex-pos">worse</td><td class="ex-pos">the worst</td></tr>
+          <tr><td>far</td><td class="ex-pos">farther/further</td><td class="ex-pos">the farthest</td></tr>
+        </table>
+        <div class="exercise-box">
+          <h4>✏️ Bài tập nhỏ</h4>
+          <div class="ex-item">1. This book is ______ (interesting) than that one. <input type="text" id="q18" placeholder="..."></div>
+          <div class="ex-item">2. She is ______ (good) student in the class. <input type="text" id="q19" placeholder="..."></div>
+          <button class="check-btn" onclick="checkComp()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-comp"><div class="answer-correct">1. more interesting &nbsp;|&nbsp; 2. the best</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-green">Câu điều kiện</span> Conditional Sentences</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="formula-box">
+          <span class="label">Loại 0 – Sự thật hiển nhiên</span>
+          <div class="fml-positive">✅ If + S + V(hiện tại), S + V(hiện tại)</div>
+        </div>
+        <div class="formula-box" style="margin-top:10px;">
+          <span class="label">Loại 1 – Có thể xảy ra (tương lai)</span>
+          <div class="fml-positive">✅ If + S + V(hiện tại), S + will + V</div>
+        </div>
+        <div class="formula-box" style="margin-top:10px;">
+          <span class="label">Loại 2 – Không có thật (hiện tại/tương lai)</span>
+          <div class="fml-positive">✅ If + S + V(quá khứ), S + would + V</div>
+        </div>
+        <table class="ex-table" style="margin-top:16px;">
+          <tr><th>Loại</th><th>Ví dụ</th><th>Tiếng Việt</th></tr>
+          <tr><td>Loại 0</td><td class="ex-pos">If you <span class="highlight-verb">heat</span> water, it <span class="highlight-verb">boils</span>.</td><td class="vn">Đun nước thì nước sôi.</td></tr>
+          <tr><td>Loại 1</td><td class="ex-pos">If it <span class="highlight-verb">rains</span>, I <span class="highlight-verb">will stay</span> home.</td><td class="vn">Nếu trời mưa, tôi sẽ ở nhà.</td></tr>
+          <tr><td>Loại 2</td><td class="ex-pos">If I <span class="highlight-verb">had</span> money, I <span class="highlight-verb">would travel</span>.</td><td class="vn">Nếu có tiền, tôi sẽ đi du lịch.</td></tr>
+        </table>
+        <div class="exercise-box">
+          <h4>✏️ Bài tập nhỏ</h4>
+          <div class="ex-item">1. If I ______ (have) a car, I would drive to work. <input type="text" id="q20" placeholder="..."></div>
+          <div class="ex-item">2. If you study hard, you ______ (pass) the exam. <input type="text" id="q21" placeholder="..."></div>
+          <button class="check-btn" onclick="checkCond()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-cond"><div class="answer-correct">1. had &nbsp;|&nbsp; 2. will pass</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-yellow">Câu hỏi đuôi</span> Question Tags</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="formula-box">
+          <span class="label">Quy tắc vàng</span>
+          <div class="fml-positive">✅ Câu khẳng định → đuôi phủ định</div>
+          <div class="fml-negative">❌ Câu phủ định → đuôi khẳng định</div>
+        </div>
+        <table class="ex-table" style="margin-top:16px;">
+          <tr><th>Câu chính</th><th>Câu hỏi đuôi</th><th>Tiếng Việt</th></tr>
+          <tr><td>It is hot today,</td><td class="ex-q">isn't it?</td><td class="vn">Hôm nay trời nóng, phải không?</td></tr>
+          <tr><td>She can swim,</td><td class="ex-q">can't she?</td><td class="vn">Cô ấy biết bơi, phải không?</td></tr>
+          <tr><td>You don't like coffee,</td><td class="ex-q">do you?</td><td class="vn">Bạn không thích cà phê, phải không?</td></tr>
+          <tr><td>They went home,</td><td class="ex-q">didn't they?</td><td class="vn">Họ về nhà rồi phải không?</td></tr>
+        </table>
+        <div class="exercise-box">
+          <h4>✏️ Bài tập nhỏ</h4>
+          <div class="ex-item">1. You are a student, ______ ______? <input type="text" id="q22" placeholder="..."></div>
+          <div class="ex-item">2. They didn't call you, ______ ______? <input type="text" id="q23" placeholder="..."></div>
+          <button class="check-btn" onclick="checkTag()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-tag"><div class="answer-correct">1. aren't you &nbsp;|&nbsp; 2. did they</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-purple">Câu bị động</span> Passive Voice</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="formula-box">
+          <span class="label">Công thức chung</span>
+          <div class="fml-positive">✅ S + be (chia thì) + V3/V-ed + (by + O)</div>
+        </div>
+        <p style="font-size:.85rem;margin-bottom:14px;color:var(--gray-600);">💡 <strong>Dấu hiệu nhận biết bị động trong bài thi:</strong> Chủ ngữ là vật, sau ô trống có "by", sau ĐT không có tân ngữ → chọn be + V3</p>
+        <table class="ex-table">
+          <tr><th>Câu chủ động</th><th>Câu bị động</th></tr>
+          <tr><td>She <span class="highlight-verb">writes</span> a letter.</td><td class="ex-pos">A letter <span class="highlight-verb">is written</span> by her.</td></tr>
+          <tr><td>They <span class="highlight-verb">built</span> this house in 1990.</td><td class="ex-pos">This house <span class="highlight-verb">was built</span> in 1990.</td></tr>
+          <tr><td>Someone <span class="highlight-verb">will repair</span> the car.</td><td class="ex-pos">The car <span class="highlight-verb">will be repaired</span>.</td></tr>
+        </table>
+        <div class="exercise-box">
+          <h4>✏️ Bài tập nhỏ</h4>
+          <div class="ex-item">1. They clean the office every day. → The office ______ every day. <input type="text" id="q24" placeholder="..."></div>
+          <div class="ex-item">2. Someone stole my bike. → My bike ______. <input type="text" id="q25" placeholder="..."></div>
+          <button class="check-btn" onclick="checkPassive()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-passive"><div class="answer-correct">1. is cleaned &nbsp;|&nbsp; 2. was stolen</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-orange">Mệnh đề quan hệ</span> Relative Clauses – Who / Which / That / Whose</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <table class="ex-table">
+          <tr><th>Đại từ</th><th>Dùng cho</th><th>Vị trí</th><th>Ví dụ</th></tr>
+          <tr><td class="ex-pos"><strong>Who</strong></td><td>Người</td><td>Đứng trước ĐT (làm chủ ngữ)</td><td>The man <span class="highlight-verb">who</span> lives next door is kind.</td></tr>
+          <tr><td class="ex-pos"><strong>Whom</strong></td><td>Người</td><td>Đứng trước S+V (làm tân ngữ)</td><td>The teacher <span class="highlight-verb">whom</span> I met was nice.</td></tr>
+          <tr><td class="ex-pos"><strong>Which</strong></td><td>Vật/sự vật</td><td>Thay cho danh từ là vật</td><td>The book <span class="highlight-verb">which</span> I bought is great.</td></tr>
+          <tr><td class="ex-pos"><strong>Whose</strong></td><td>Sở hữu</td><td>Trước danh từ không có mạo từ</td><td>The girl <span class="highlight-verb">whose</span> bag is red is my friend.</td></tr>
+          <tr><td class="ex-neg"><strong>That</strong></td><td>Người/Vật</td><td>KHÔNG dùng sau dấu phẩy hoặc sau giới từ</td><td>The car <span class="highlight-verb">that</span> I drive is old.</td></tr>
+        </table>
+        <div style="background:var(--orange-light);border-radius:8px;padding:14px;margin-top:12px;font-size:.87rem;border-left:3px solid var(--orange);">
+          <strong>⚠️ Bẫy thi phổ biến:</strong><br>
+          Không bao giờ dùng <strong>THAT</strong> sau dấu phẩy (,) hoặc sau giới từ (in, on, at, for...)<br>
+          ❌ The city, <u>that</u> I visited... → ✅ The city, <u>which</u> I visited...
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end tab-sentence -->
+
+  <!-- TAB: PARTS OF SPEECH -->
+  <div id="tab-parts" class="tab-content">
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-blue">Danh từ</span> Nouns – Số ít & Số nhiều</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <table class="ex-table">
+          <tr><th>Quy tắc</th><th>Ví dụ</th></tr>
+          <tr><td>Thêm <strong>-s</strong> (thông thường)</td><td class="ex-pos">book→books · car→cars</td></tr>
+          <tr><td>Thêm <strong>-es</strong> (ch, sh, s, x, z)</td><td class="ex-pos">watch→watches · bus→buses</td></tr>
+          <tr><td>Tận cùng <strong>-y</strong> → <strong>-ies</strong></td><td class="ex-pos">city→cities · baby→babies</td></tr>
+          <tr><td>Bất quy tắc</td><td class="ex-pos">man→men · woman→women · child→children · tooth→teeth · foot→feet · mouse→mice</td></tr>
+          <tr><td>Không đổi</td><td class="ex-pos">fish · sheep · deer</td></tr>
+        </table>
+        <div class="exercise-box">
+          <h4>✏️ Chuyển sang số nhiều</h4>
+          <div class="ex-item">1. city → <input type="text" id="q26" placeholder="..."></div>
+          <div class="ex-item">2. child → <input type="text" id="q27" placeholder="..."></div>
+          <div class="ex-item">3. box → <input type="text" id="q28" placeholder="..."></div>
+          <button class="check-btn" onclick="checkNoun()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-noun"><div class="answer-correct">1. cities &nbsp;|&nbsp; 2. children &nbsp;|&nbsp; 3. boxes</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-green">Trạng từ</span> Adverbs – Cách tạo & Vị trí</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="formula-box">
+          <span class="label">Cách tạo trạng từ từ tính từ</span>
+          <div class="fml-positive">quick→quickly · careful→carefully</div>
+          <div class="fml-positive">easy→easily · happy→happily (đổi y→i)</div>
+          <div class="fml-negative">fast→fast · hard→hard · well→well (không đổi)</div>
+        </div>
+        <table class="ex-table" style="margin-top:12px;">
+          <tr><th>Loại trạng từ</th><th>Ví dụ</th><th>Vị trí thường gặp</th></tr>
+          <tr><td>Tần suất</td><td class="ex-pos">always, usually, often, sometimes, never</td><td>Trước động từ chính</td></tr>
+          <tr><td>Cách thức</td><td class="ex-pos">quickly, slowly, carefully</td><td>Sau động từ/tân ngữ</td></tr>
+          <tr><td>Thời gian</td><td class="ex-pos">today, yesterday, now, soon</td><td>Đầu hoặc cuối câu</td></tr>
+          <tr><td>Nơi chốn</td><td class="ex-pos">here, there, everywhere, abroad</td><td>Sau động từ</td></tr>
+        </table>
+        <div class="exercise-box">
+          <h4>✏️ Chuyển tính từ thành trạng từ</h4>
+          <div class="ex-item">1. quick → <input type="text" id="q29" placeholder="..."></div>
+          <div class="ex-item">2. happy → <input type="text" id="q30" placeholder="..."></div>
+          <button class="check-btn" onclick="checkAdv()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-adv"><div class="answer-correct">1. quickly &nbsp;|&nbsp; 2. happily</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-yellow">Giới từ</span> Prepositions – In / On / At</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <table class="ex-table">
+          <tr><th>Giới từ</th><th>Dùng cho thời gian</th><th>Dùng cho nơi chốn</th></tr>
+          <tr><td class="ex-pos"><strong>IN</strong></td><td>in 2024, in January, in the morning, in summer</td><td>in Vietnam, in a room, in the box</td></tr>
+          <tr><td class="ex-pos"><strong>ON</strong></td><td>on Monday, on 5 June, on my birthday</td><td>on the table, on the wall, on the bus</td></tr>
+          <tr><td class="ex-pos"><strong>AT</strong></td><td>at 7pm, at noon, at midnight, at Christmas</td><td>at home, at school, at the airport</td></tr>
+        </table>
+        <div class="exercise-box">
+          <h4>✏️ Bài tập nhỏ</h4>
+          <div class="ex-item">1. I was born ______ 1998. <input type="text" id="q31" placeholder="..."></div>
+          <div class="ex-item">2. The meeting is ______ Monday ______ 9am. <input type="text" id="q32" placeholder="..."></div>
+          <button class="check-btn" onclick="checkPrep()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-prep"><div class="answer-correct">1. in &nbsp;|&nbsp; 2. on / at</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-red">Mạo từ</span> Articles – A / An / The</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <table class="ex-table">
+          <tr><th>Mạo từ</th><th>Dùng khi nào</th><th>Ví dụ</th></tr>
+          <tr><td class="ex-pos"><strong>A</strong></td><td>Số ít, bắt đầu bằng phụ âm, lần đầu nhắc đến</td><td>a book, a car, a university</td></tr>
+          <tr><td class="ex-pos"><strong>AN</strong></td><td>Số ít, bắt đầu bằng nguyên âm (a,e,i,o,u)</td><td>an apple, an hour, an umbrella</td></tr>
+          <tr><td class="ex-pos"><strong>THE</strong></td><td>Đã biết, đã nhắc đến, duy nhất trên đời</td><td>the sun, the book (I told you about)</td></tr>
+          <tr><td class="ex-neg"><strong>Không dùng</strong></td><td>Danh từ số nhiều chung chung, danh từ trừu tượng</td><td>I like dogs. Love is beautiful.</td></tr>
+        </table>
+        <div class="exercise-box">
+          <h4>✏️ Bài tập nhỏ</h4>
+          <div class="ex-item">1. She bought ______ umbrella yesterday. <input type="text" id="q33" placeholder="..."></div>
+          <div class="ex-item">2. ______ Earth goes around ______ Sun. <input type="text" id="q34" placeholder="..."></div>
+          <button class="check-btn" onclick="checkArt()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-art"><div class="answer-correct">1. an &nbsp;|&nbsp; 2. The / the</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grammar-card">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title"><span class="card-tag tag-purple">Liên từ</span> Conjunctions – Because, Although, Despite...</div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="card-body">
+        <div class="formula-box">
+          <span class="label">Quy tắc chọn liên từ / giới từ</span>
+          <div class="fml-positive">✅ Sau ô trống là mệnh đề (S + V) → dùng: Although, Even though, Because, Since, As</div>
+          <div class="fml-question">✅ Sau ô trống là cụm danh từ / V-ing → dùng: Despite, In spite of, Because of, Due to</div>
+        </div>
+        <table class="ex-table" style="margin-top:14px;">
+          <tr><th>Liên từ/Giới từ</th><th>Đi với</th><th>Ví dụ</th></tr>
+          <tr><td class="ex-pos"><strong>Although</strong></td><td>mệnh đề S+V</td><td>Although it rained, we went out.</td></tr>
+          <tr><td class="ex-pos"><strong>Despite</strong></td><td>cụm danh từ / V-ing</td><td>Despite the rain, we went out.</td></tr>
+          <tr><td class="ex-pos"><strong>Because</strong></td><td>mệnh đề S+V</td><td>I stayed home because I was sick.</td></tr>
+          <tr><td class="ex-pos"><strong>Because of</strong></td><td>cụm danh từ</td><td>I stayed home because of my illness.</td></tr>
+        </table>
+        <div class="exercise-box">
+          <h4>✏️ Bài tập nhỏ</h4>
+          <div class="ex-item">1. ______ the traffic, I was late. (Despite/Although) <input type="text" id="q35" placeholder="..."></div>
+          <div class="ex-item">2. ______ she was tired, she kept working. (Despite/Although) <input type="text" id="q36" placeholder="..."></div>
+          <button class="check-btn" onclick="checkConj()">Kiểm tra đáp án</button>
+          <div class="answer-reveal" id="ans-conj"><div class="answer-correct">1. Despite &nbsp;|&nbsp; 2. Although</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end tab-parts -->
+</div><!-- end page-grammar -->
+
+<!-- ═══════════════ TIPS PAGE ═══════════════ -->
+<div id="page-tips" class="container" style="display:none;">
+  <div class="section-title">🎯 Mẹo Làm Bài Thi Tiếng Anh</div>
+  <div class="section-sub">Chiến thuật nhận dạng nhanh, khoanh lụi thông minh, tránh bẫy đề</div>
+
+  <div class="exam-banner">
+    <div class="eb-icon">⚠️</div>
+    <div>
+      <h3>Nguyên tắc quan trọng nhất</h3>
+      <p>Không bao giờ bỏ trống câu trắc nghiệm. Gần hết giờ → khoanh lụi toàn bộ. Quản lý thời gian: dễ làm trước, khó làm sau. Câu nào đọc quá 2 phút không ra → đánh dấu, bỏ qua, quay lại sau.</p>
+    </div>
+  </div>
+
+  <!-- PHẦN 1 -->
+  <div class="tips-section-title">⚡ Phần 1 – Mẹo Chọn Đáp Án Nhanh (Khoanh Lụi Thông Minh)</div>
+
+  <div class="tips-grid">
+    <div class="tip-card t-red">
+      <span class="tip-icon">🔑</span>
+      <h3>Từ khóa "vàng" – Nhìn thấy là ưu tiên khoanh</h3>
+      <p>Nếu đáp án chứa những từ sau, ưu tiên chọn ngay:</p>
+      <ul class="tip-list">
+        <li><strong>Become</strong> – thường là đáp án đúng trong câu chuyển đổi</li>
+        <li><strong>The + ...er</strong> (the more, the better) – cấu trúc so sánh kép</li>
+        <li><strong>By the time</strong> – dấu hiệu hoàn thành trước một mốc</li>
+        <li><strong>Having + V3</strong> – mệnh đề rút gọn hoàn thành</li>
+        <li><strong>However / Although / Despite</strong> – đối lập ý</li>
+      </ul>
+    </div>
+
+    <div class="tip-card t-orange">
+      <span class="tip-icon">🎯</span>
+      <h3>Quy luật 2 đáp án giống nhau</h3>
+      <p>Khi đề có 2 đáp án trắc nghiệm trông gần giống nhau, thường 1 trong 2 là đúng. Tập trung phân tích sự khác biệt nhỏ giữa 2 đáp án đó.</p>
+      <ul class="tip-list">
+        <li>Đọc kỹ từng chữ cái khác biệt</li>
+        <li>Xét ngữ cảnh câu để loại đáp án</li>
+        <li>Loại 2 đáp án sai rõ ràng trước, chọn trong 2 đáp án còn lại</li>
+      </ul>
+    </div>
+
+    <div class="tip-card t-blue">
+      <span class="tip-icon">📍</span>
+      <h3>Mẹo chỗ trống theo vị trí</h3>
+      <ul class="tip-list">
+        <li>Chỗ trống <strong>đầu câu</strong> → chọn đáp án dạng <strong>Having + V3</strong></li>
+        <li>Câu có từ <strong>IF</strong> + động từ "have" → chọn đáp án có <strong>had</strong></li>
+        <li>Chỗ trống sau <strong>giới từ</strong> (in, on, at, for...) → chọn đáp án đuôi <strong>-ing</strong></li>
+        <li>Chỗ trống sau <strong>to</strong> → chọn động từ nguyên thể (V bare)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PHẦN 2 -->
+  <div class="tips-section-title">⏱️ Phần 2 – Nhận Biết Thì Qua Dấu Hiệu</div>
+
+  <div class="trick-box tb-yellow">
+    <h4>⚡ Bảng dấu hiệu nhận biết thì – Nhìn phát chọn luôn</h4>
+    <ul>
+      <li><strong>always / usually / often / sometimes / never / every day / on Mondays</strong> → Hiện tại đơn</li>
+      <li><strong>now / right now / at the moment / look! / listen!</strong> → Hiện tại tiếp diễn</li>
+      <li><strong>yesterday / ago / last night / last week / in 2020 / when I was...</strong> → Quá khứ đơn</li>
+      <li><strong>at 7pm yesterday / when she called / while I was...</strong> → Quá khứ tiếp diễn</li>
+      <li><strong>tomorrow / next week / soon / I think / I hope / I promise</strong> → Tương lai đơn (will)</li>
+      <li><strong>already / yet / ever / never / just / since / for / so far / up to now / recently</strong> → Hiện tại hoàn thành</li>
+    </ul>
+  </div>
+
+  <div class="tips-grid" style="margin-top:20px;">
+    <div class="tip-card t-green">
+      <span class="tip-icon">👁️</span>
+      <h3>Quy trình nhận dạng thì 3 bước</h3>
+      <ul class="tip-list">
+        <li><strong>Bước 1:</strong> Tìm dấu hiệu thời gian trong câu (từ khóa trên)</li>
+        <li><strong>Bước 2:</strong> Xác định chủ ngữ (I/She/They...) để chia đúng</li>
+        <li><strong>Bước 3:</strong> Xét nghĩa câu có phủ định không (don't/doesn't/didn't)</li>
+      </ul>
+    </div>
+    <div class="tip-card t-yellow">
+      <span class="tip-icon">🔍</span>
+      <h3>Since vs For – Hết nhầm mãi</h3>
+      <ul class="tip-list">
+        <li><strong>SINCE</strong> + điểm cụ thể: since 2020, since Monday, since I was born</li>
+        <li><strong>FOR</strong> + khoảng thời gian: for 3 years, for two weeks, for a long time</li>
+        <li>Mẹo: "for" luôn đi với con số khoảng thời gian</li>
+        <li>Mẹo: "since" luôn đi với mốc thời gian cụ thể</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PHẦN 3 -->
+  <div class="tips-section-title">🔤 Phần 3 – Nhận Biết Từ Loại Qua Đuôi Từ</div>
+
+  <div class="suffix-grid">
+    <div class="suffix-card sc-noun">
+      <h4>📌 Danh từ (Noun)</h4>
+      <div class="suffix-tags">
+        <span class="suffix-tag">-tion</span>
+        <span class="suffix-tag">-sion</span>
+        <span class="suffix-tag">-ment</span>
+        <span class="suffix-tag">-ness</span>
+        <span class="suffix-tag">-ity</span>
+        <span class="suffix-tag">-ance</span>
+        <span class="suffix-tag">-ence</span>
+        <span class="suffix-tag">-er</span>
+        <span class="suffix-tag">-or</span>
+      </div>
+    </div>
+    <div class="suffix-card sc-adj">
+      <h4>📌 Tính từ (Adjective)</h4>
+      <div class="suffix-tags">
+        <span class="suffix-tag">-ful</span>
+        <span class="suffix-tag">-less</span>
+        <span class="suffix-tag">-ous</span>
+        <span class="suffix-tag">-al</span>
+        <span class="suffix-tag">-ic</span>
+        <span class="suffix-tag">-ive</span>
+        <span class="suffix-tag">-able</span>
+        <span class="suffix-tag">-ible</span>
+      </div>
+    </div>
+    <div class="suffix-card sc-adv">
+      <h4>📌 Trạng từ (Adverb)</h4>
+      <div class="suffix-tags">
+        <span class="suffix-tag">-ly</span>
+      </div>
+      <p style="font-size:.82rem;margin-top:8px;color:var(--gray-600);">Tính từ + <strong>-ly</strong> = trạng từ<br>quick → quickly<br>careful → carefully</p>
+    </div>
+    <div class="suffix-card sc-verb">
+      <h4>📌 Động từ (Verb)</h4>
+      <div class="suffix-tags">
+        <span class="suffix-tag">-ize</span>
+        <span class="suffix-tag">-ise</span>
+        <span class="suffix-tag">-en</span>
+        <span class="suffix-tag">-ate</span>
+        <span class="suffix-tag">-ify</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHẦN 4 -->
+  <div class="tips-section-title">🔊 Phần 4 – Phát Âm Đuôi -s/es và -ed</div>
+
+  <div class="pron-grid">
+    <div class="pron-card">
+      <h4 style="color:var(--blue);">📣 Đuôi "-ed" – 3 cách đọc</h4>
+      <div class="pron-row"><span class="pron-sound">/ɪd/</span><span class="pron-ends">t, d</span><span class="pron-ex">wanted, needed ("Tiền Đô")</span></div>
+      <div class="pron-row"><span class="pron-sound">/t/</span><span class="pron-ends">c,ch,s,sh,k,p,f,ph,gh</span><span class="pron-ex">watched, washed, laughed</span></div>
+      <div class="pron-row"><span class="pron-sound">/d/</span><span class="pron-ends">còn lại</span><span class="pron-ex">played, studied, called</span></div>
+      <p style="font-size:.78rem;color:var(--gray-600);margin-top:8px;">💡 Ghi nhớ /ɪd/: "<strong>Tiền Đô</strong>" → t và d</p>
+    </div>
+    <div class="pron-card">
+      <h4 style="color:var(--green);">📣 Đuôi "-s/es" – 3 cách đọc</h4>
+      <div class="pron-row"><span class="pron-sound">/s/</span><span class="pron-ends">p,k,t,f,th</span><span class="pron-ex">stops, talks, laughs</span></div>
+      <div class="pron-row"><span class="pron-sound">/ɪz/</span><span class="pron-ends">s,ss,ch,sh,x,z,ge,ce</span><span class="pron-ex">buses, watches, boxes</span></div>
+      <div class="pron-row"><span class="pron-sound">/z/</span><span class="pron-ends">còn lại</span><span class="pron-ex">plays, calls, runs</span></div>
+      <p style="font-size:.78rem;color:var(--gray-600);margin-top:8px;">💡 Ghi nhớ /s/: "<strong>Thời Phong Kiến Phương Tây</strong>" → th,p,k,t,f</p>
+    </div>
+  </div>
+
+  <!-- PHẦN 5 -->
+  <div class="tips-section-title">📝 Phần 5 – Mẹo Tìm Lỗi Sai & Đọc Hiểu</div>
+
+  <div class="tricks-list">
+    <div class="trick-box tb-red">
+      <h4>🐛 Dạng Bài Tìm Lỗi Sai</h4>
+      <ul>
+        <li>Phần gạch chân chứa <strong>Who, Whom, Which</strong> → Kiểm tra xem có dùng sai đại từ quan hệ không</li>
+        <li>Phần gạch chân chứa <strong>V-ing hoặc V-ed</strong> → Kiểm tra xem nên dùng <strong>To + V</strong> không</li>
+        <li>Phần gạch chân chứa <strong>That sau dấu phẩy</strong> → Lỗi sai! Phải dùng Which</li>
+        <li>Phần gạch chân là <strong>trạng từ thay vì tính từ</strong> (hoặc ngược lại) → Lỗi từ loại phổ biến</li>
+      </ul>
+    </div>
+
+    <div class="trick-box tb-blue">
+      <h4>📖 Dạng Bài Đọc Hiểu</h4>
+      <ul>
+        <li><strong>Câu hỏi đại từ thay thế:</strong> Khi đề gạch chân đại từ (it, they, he...) → tìm danh từ gần nhất phía trước trong bài</li>
+        <li><strong>Đọc câu hỏi trước</strong>, xác định từ khóa, rồi mới vào đọc bài để tìm đúng đoạn</li>
+        <li><strong>Đừng đọc từng từ</strong> – đọc nhanh toàn bài 1 lần để nắm ý chính, chú ý câu đầu và cuối mỗi đoạn</li>
+        <li><strong>Gặp từ lạ</strong> → đọc câu xung quanh để đoán nghĩa, không dừng tra từ điển</li>
+        <li><strong>Loại trừ:</strong> Đáp án nào trái hoàn toàn với bài đọc → loại ngay</li>
+      </ul>
+    </div>
+
+    <div class="trick-box tb-purple">
+      <h4>🔀 Dạng Bài Câu Bị Động</h4>
+      <ul>
+        <li>Chủ ngữ câu là <strong>vật</strong> (không tự làm được hành động) → nghi ngờ bị động</li>
+        <li>Sau ô trống có giới từ <strong>"by"</strong> → chắc chắn bị động → chọn <strong>be + V3</strong></li>
+        <li>Sau động từ <strong>không có tân ngữ</strong> nào theo sau → bị động</li>
+        <li>Xác định thì qua ngữ cảnh rồi chia "be" đúng thì (is/was/will be/has been...)</li>
+      </ul>
+    </div>
+
+    <div class="trick-box tb-green">
+      <h4>🔗 Mẹo Chọn Liên Từ / Giới Từ Nhanh</h4>
+      <ul>
+        <li>Sau ô trống là <strong>mệnh đề (có S + V)</strong> → dùng: Although, Even though, Because, Since, As, When, While</li>
+        <li>Sau ô trống là <strong>cụm danh từ / V-ing</strong> → dùng: Despite, In spite of, Because of, Due to, During</li>
+        <li>Ý nghĩa <strong>đối lập</strong>: Although/Even though (+ mệnh đề) hoặc Despite/In spite of (+ cụm)</li>
+        <li>Ý nghĩa <strong>nguyên nhân</strong>: Because/Since (+ mệnh đề) hoặc Because of/Due to (+ cụm)</li>
+      </ul>
+    </div>
+
+    <div class="trick-box tb-orange">
+      <h4>📣 Mẹo Câu Hỏi Đuôi (Question Tags)</h4>
+      <ul>
+        <li>Câu chính <strong>khẳng định</strong> → đuôi <strong>phủ định</strong> (isn't it?, can't she?, didn't they?)</li>
+        <li>Câu chính <strong>phủ định</strong> → đuôi <strong>khẳng định</strong> (is it?, can she?, did they?)</li>
+        <li>Đuôi luôn dùng <strong>đại từ</strong>, không dùng danh từ (he/she/they, không dùng John/the team)</li>
+        <li>Câu có <strong>I am</strong> → đuôi là <strong>aren't I?</strong> (đặc biệt)</li>
+      </ul>
+    </div>
+
+    <div class="trick-box tb-yellow">
+      <h4>💡 Mẹo Mệnh Đề Quan Hệ</h4>
+      <ul>
+        <li><strong>Who</strong> – đứng trước động từ (thay cho chủ ngữ là người)</li>
+        <li><strong>Whom</strong> – đứng trước S+V (thay cho tân ngữ là người)</li>
+        <li><strong>Whose</strong> – đứng trước danh từ không có mạo từ (quan hệ sở hữu)</li>
+        <li><strong>That</strong> – TUYỆT ĐỐI không dùng sau dấu phẩy (,) hoặc sau giới từ</li>
+        <li>Sau dấu phẩy → chỉ dùng <strong>Who</strong> hoặc <strong>Which</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PHẦN 6 -->
+  <div class="tips-section-title">🏫 Phần 6 – Chiến Thuật Phòng Thi</div>
+
+  <div class="tips-grid">
+    <div class="tip-card t-red">
+      <span class="tip-icon">⏰</span>
+      <h3>Quản lý thời gian</h3>
+      <ul class="tip-list">
+        <li>Đọc qua tất cả câu hỏi nhanh – dễ làm trước</li>
+        <li>Câu nào đọc quá 2 phút không ra → đánh dấu, bỏ qua</li>
+        <li>Dành 5 phút cuối để quay lại các câu đã bỏ</li>
+        <li>Không bao giờ để trống – khoanh lụi vẫn có thể đúng</li>
+      </ul>
+    </div>
+
+    <div class="tip-card t-blue">
+      <span class="tip-icon">👁️</span>
+      <h3>Đọc đề cẩn thận – Tránh bẫy</h3>
+      <ul class="tip-list">
+        <li>Chú ý các từ in hoa: <strong>NOT, EXCEPT, TRUE, FALSE</strong></li>
+        <li>Phân biệt yêu cầu: từ đồng nghĩa (CLOSEST) hay trái nghĩa (OPPOSITE)</li>
+        <li>Gạch chân từ khóa trong câu hỏi trước khi chọn</li>
+        <li>Không thay đổi đáp án trừ khi chắc chắn 100%</li>
+      </ul>
+    </div>
+
+    <div class="tip-card t-green">
+      <span class="tip-icon">❌</span>
+      <h3>Phương pháp loại trừ</h3>
+      <ul class="tip-list">
+        <li>Loại bỏ ngay đáp án rõ ràng sai về ngữ pháp</li>
+        <li>Loại đáp án có nghĩa hoàn toàn trái với ngữ cảnh</li>
+        <li>Còn 2 đáp án → đọc kỹ ngữ cảnh câu để chọn</li>
+        <li>Nếu vẫn không chắc → chọn đáp án dài hơn (thường đúng hơn)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Trang học Tiếng Anh A2 · Ngữ pháp · Mẹo thi · <span>Chúc bạn thi đỗ! 🎉</span>
+</footer>
+
+<script>
+  function showPage(page, el) {
+    document.querySelectorAll('[id^="page-"]').forEach(p => p.style.display='none');
+    document.getElementById('page-' + page).style.display = 'block';
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    if (el) el.classList.add('active');
+    window.scrollTo(0,0);
+  }
+  function showTab(tab, el) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    if (el) el.classList.add('active');
+  }
+  function toggleCard(header) {
+    const body = header.nextElementSibling;
+    const arrow = header.querySelector('.arrow');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    arrow.classList.toggle('open', !isOpen);
+    header.classList.toggle('open', !isOpen);
+  }
+  // Grammar exercises
+  function checkPS() { document.getElementById('ans-ps').classList.add('show'); }
+  function checkPC() { document.getElementById('ans-pc').classList.add('show'); }
+  function checkFuture() { document.getElementById('ans-future').classList.add('show'); }
+  function checkPP() { document.getElementById('ans-pp').classList.add('show'); }
+  function checkModal1() { document.getElementById('ans-modal1').classList.add('show'); }
+  function checkModal2() { document.getElementById('ans-modal2').classList.add('show'); }
+  function checkModal3() { document.getElementById('ans-modal3').classList.add('show'); }
+  function checkModal4() { document.getElementById('ans-modal4').classList.add('show'); }
+  function checkComp() { document.getElementById('ans-comp').classList.add('show'); }
+  function checkCond() { document.getElementById('ans-cond').classList.add('show'); }
+  function checkTag() { document.getElementById('ans-tag').classList.add('show'); }
+  function checkPassive() { document.getElementById('ans-passive').classList.add('show'); }
+  function checkNoun() { document.getElementById('ans-noun').classList.add('show'); }
+  function checkAdv() { document.getElementById('ans-adv').classList.add('show'); }
+  function checkPrep() { document.getElementById('ans-prep').classList.add('show'); }
+  function checkArt() { document.getElementById('ans-art').classList.add('show'); }
+  function checkConj() { document.getElementById('ans-conj').classList.add('show'); }
+</script>
+</body>
+</html>

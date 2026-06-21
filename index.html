@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Học Từ Vựng Tiếng Anh - Trắc Nghiệm</title>
+<style>
+  :root{
+    --bg-1:#0f1320;--bg-2:#161b2e;--card-bg:#1c2238;--card-bg-2:#222a45;
+    --accent:#5ee0c0;--accent-2:#8b7df0;--accent-warm:#f0a857;
+    --text-main:#eef1fb;--text-dim:#9aa3c4;
+    --correct:#3ddc97;--correct-bg:#163a2d;--wrong:#ff5c7a;--wrong-bg:#3a1622;
+    --radius-lg:22px;--radius-md:16px;--radius-sm:10px;
+    --shadow-soft:0 18px 40px -18px rgba(0,0,0,0.55);
+    --tag-v:#e8534a;--tag-v-bg:rgba(232,83,74,0.15);
+    --tag-n:#4a9de8;--tag-n-bg:rgba(74,157,232,0.15);
+    --tag-adj:#e8a84a;--tag-adj-bg:rgba(232,168,74,0.15);
+    --tag-adv:#4ae87a;--tag-adv-bg:rgba(74,232,122,0.15);
+    --tag-phrase:#c07cf0;--tag-phrase-bg:rgba(192,124,240,0.15);
+    --tag-pron:#f06090;--tag-pron-bg:rgba(240,96,144,0.15);
+    --tag-prep:#f0c040;--tag-prep-bg:rgba(240,192,64,0.15);
+    --tag-conj:#40d0f0;--tag-conj-bg:rgba(64,208,240,0.15);
+    --tag-num:#80e860;--tag-num-bg:rgba(128,232,96,0.15);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;min-height:100vh;
+    font-family:'Segoe UI',system-ui,-apple-system,Roboto,sans-serif;
+    background:
+      radial-gradient(circle at 12% 8%,rgba(94,224,192,0.10),transparent 45%),
+      radial-gradient(circle at 88% 92%,rgba(139,125,240,0.12),transparent 45%),
+      linear-gradient(160deg,var(--bg-1),var(--bg-2));
+    color:var(--text-main);display:flex;justify-content:center;
+    padding:28px 16px 60px;
+  }
+  .app{width:100%;max-width:560px;display:flex;flex-direction:column;gap:18px;}
+  .app-header{text-align:center;margin-bottom:4px;}
+  .app-header h1{font-size:1.5rem;margin:0 0 4px;font-weight:700;}
+  .app-header h1 span{color:var(--accent);}
+  .app-header p{margin:0;color:var(--text-dim);font-size:0.88rem;}
+
+  .filter-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .filter-label{font-size:0.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;white-space:nowrap;}
+  .filter-btns{display:flex;flex-wrap:wrap;gap:6px;}
+  .flt-btn{
+    padding:5px 12px;border-radius:99px;font-size:0.75rem;font-weight:700;
+    border:1.5px solid;cursor:pointer;font-family:inherit;transition:all .18s ease;
+    background:transparent;
+  }
+  .flt-btn[data-type="all"]{border-color:rgba(255,255,255,0.25);color:var(--text-dim);}
+  .flt-btn[data-type="all"].active{background:rgba(255,255,255,0.12);color:var(--text-main);border-color:rgba(255,255,255,0.5);}
+  .flt-btn[data-type="v"]{border-color:var(--tag-v);color:var(--tag-v);}
+  .flt-btn[data-type="v"].active{background:var(--tag-v-bg);}
+  .flt-btn[data-type="n"]{border-color:var(--tag-n);color:var(--tag-n);}
+  .flt-btn[data-type="n"].active{background:var(--tag-n-bg);}
+  .flt-btn[data-type="adj"]{border-color:var(--tag-adj);color:var(--tag-adj);}
+  .flt-btn[data-type="adj"].active{background:var(--tag-adj-bg);}
+  .flt-btn[data-type="adv"]{border-color:var(--tag-adv);color:var(--tag-adv);}
+  .flt-btn[data-type="adv"].active{background:var(--tag-adv-bg);}
+  .flt-btn[data-type="phrase"]{border-color:var(--tag-phrase);color:var(--tag-phrase);}
+  .flt-btn[data-type="phrase"].active{background:var(--tag-phrase-bg);}
+  .flt-btn[data-type="prep"]{border-color:var(--tag-prep);color:var(--tag-prep);}
+  .flt-btn[data-type="prep"].active{background:var(--tag-prep-bg);}
+
+  .level-badge{
+    display:inline-block;font-size:0.62rem;font-weight:800;padding:2px 7px;
+    border-radius:5px;letter-spacing:0.06em;text-transform:uppercase;
+    vertical-align:middle;margin-left:6px;
+  }
+  .lvl-a1{background:rgba(74,232,122,0.2);color:#4ae87a;border:1px solid rgba(74,232,122,0.4);}
+  .lvl-a2{background:rgba(94,224,192,0.2);color:#5ee0c0;border:1px solid rgba(94,224,192,0.4);}
+
+  .stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+  .stat-box{background:var(--card-bg);border-radius:var(--radius-md);padding:14px 8px;text-align:center;box-shadow:var(--shadow-soft);border:1px solid rgba(255,255,255,0.05);}
+  .stat-box .num{font-size:1.5rem;font-weight:800;line-height:1.1;}
+  .stat-box .label{font-size:0.7rem;color:var(--text-dim);margin-top:4px;text-transform:uppercase;letter-spacing:0.04em;}
+  .stat-box.total .num{color:var(--text-main);}
+  .stat-box.learned .num{color:var(--correct);}
+  .stat-box.remaining .num{color:var(--accent-warm);}
+
+  .progress-track{width:100%;height:8px;border-radius:99px;background:rgba(255,255,255,0.07);overflow:hidden;}
+  .progress-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%;transition:width .4s ease;}
+
+  .quiz-card{
+    background:linear-gradient(165deg,var(--card-bg-2),var(--card-bg));
+    border-radius:var(--radius-lg);padding:30px 24px 26px;
+    box-shadow:var(--shadow-soft);border:1px solid rgba(255,255,255,0.06);
+    position:relative;overflow:hidden;
+  }
+  .quiz-card::before{content:"";position:absolute;top:-60px;right:-60px;width:160px;height:160px;background:radial-gradient(circle,rgba(94,224,192,0.18),transparent 70%);pointer-events:none;}
+
+  .question-eyebrow{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .question-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+
+  .word-type-tag{
+    display:inline-block;font-size:0.7rem;font-weight:800;padding:3px 10px;
+    border-radius:6px;letter-spacing:0.04em;margin-bottom:10px;
+  }
+  .wtt-v{background:var(--tag-v-bg);color:var(--tag-v);border:1px solid rgba(232,83,74,0.3);}
+  .wtt-n{background:var(--tag-n-bg);color:var(--tag-n);border:1px solid rgba(74,157,232,0.3);}
+  .wtt-adj{background:var(--tag-adj-bg);color:var(--tag-adj);border:1px solid rgba(232,168,74,0.3);}
+  .wtt-adv{background:var(--tag-adv-bg);color:var(--tag-adv);border:1px solid rgba(74,232,122,0.3);}
+  .wtt-phrase{background:var(--tag-phrase-bg);color:var(--tag-phrase);border:1px solid rgba(192,124,240,0.3);}
+  .wtt-pron{background:var(--tag-pron-bg);color:var(--tag-pron);border:1px solid rgba(240,96,144,0.3);}
+  .wtt-prep{background:var(--tag-prep-bg);color:var(--tag-prep);border:1px solid rgba(240,192,64,0.3);}
+  .wtt-conj{background:var(--tag-conj-bg);color:var(--tag-conj);border:1px solid rgba(64,208,240,0.3);}
+  .wtt-num{background:var(--tag-num-bg);color:var(--tag-num);border:1px solid rgba(128,232,96,0.3);}
+
+  .word-display{text-align:center;margin:4px 0 18px;}
+  .word-display .en-word{font-size:2.3rem;font-weight:800;color:var(--text-main);word-break:break-word;line-height:1.2;}
+  .word-display .phonetic{margin-top:8px;font-size:1.05rem;color:var(--accent-2);font-style:italic;}
+
+  .speak-wrap{display:flex;justify-content:center;margin-top:12px;}
+  .speak-btn{
+    display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border-radius:99px;
+    border:1.5px solid rgba(94,224,192,0.35);background:rgba(94,224,192,0.08);
+    color:var(--accent);font-size:0.88rem;font-weight:600;cursor:pointer;font-family:inherit;
+    transition:all .2s ease;letter-spacing:0.02em;
+  }
+  .speak-btn:hover{background:rgba(94,224,192,0.16);border-color:rgba(94,224,192,0.6);}
+  .speak-btn:active{transform:scale(0.96);}
+  .speak-btn svg{width:16px;height:16px;flex-shrink:0;transition:transform .15s ease;}
+  .speak-btn.speaking{color:var(--accent-warm);border-color:rgba(240,168,87,0.5);background:rgba(240,168,87,0.1);}
+  .speak-btn.speaking svg{animation:pulse-icon 0.7s ease-in-out infinite alternate;}
+  @keyframes pulse-icon{from{transform:scale(1);}to{transform:scale(1.25);}}
+
+  .speed-wrap{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px;}
+  .speed-label{font-size:0.75rem;color:var(--text-dim);letter-spacing:0.04em;}
+  .speed-select{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:var(--text-main);font-size:0.8rem;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:inherit;outline:none;}
+  .speed-select:focus{border-color:rgba(94,224,192,0.5);}
+
+  .options{display:flex;flex-direction:column;gap:12px;margin-top:20px;}
+  .option-btn{
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+    padding:14px 16px;border-radius:var(--radius-sm);
+    border:1.5px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.03);
+    color:var(--text-main);font-size:0.98rem;cursor:pointer;
+    transition:transform .15s ease,background .2s ease,border-color .2s ease;font-family:inherit;
+  }
+  .option-btn:hover:not(:disabled){background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.18);transform:translateY(-1px);}
+  .option-btn:active:not(:disabled){transform:translateY(0) scale(0.99);}
+  .option-btn:disabled{cursor:default;}
+  .option-btn .letter{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;color:var(--text-dim);}
+  .option-btn.correct{background:var(--correct-bg);border-color:var(--correct);color:#d8ffe9;}
+  .option-btn.correct .letter{background:var(--correct);color:#0c2a1c;}
+  .option-btn.wrong{background:var(--wrong-bg);border-color:var(--wrong);color:#ffd9e1;}
+  .option-btn.wrong .letter{background:var(--wrong);color:#330712;}
+
+  .feedback-row{margin-top:18px;min-height:28px;text-align:center;font-weight:700;font-size:0.95rem;opacity:0;transition:opacity .25s ease;}
+  .feedback-row.show{opacity:1;}
+  .feedback-row.is-correct{color:var(--correct);}
+  .feedback-row.is-wrong{color:var(--wrong);}
+
+  .next-btn{margin-top:14px;width:100%;padding:14px;border:none;border-radius:var(--radius-sm);background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#0e1326;font-weight:800;font-size:1rem;cursor:pointer;display:none;box-shadow:0 12px 24px -10px rgba(94,224,192,0.45);font-family:inherit;}
+  .next-btn:hover{filter:brightness(1.05);}
+  .next-btn.show{display:block;}
+
+  .legend{display:flex;flex-wrap:wrap;gap:6px;padding:14px 16px;background:var(--card-bg);border-radius:var(--radius-md);border:1px solid rgba(255,255,255,0.05);}
+  .legend-title{width:100%;font-size:0.7rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;}
+  .leg-item{display:inline-flex;align-items:center;gap:5px;font-size:0.75rem;color:var(--text-dim);}
+  .leg-tag{font-size:0.65rem;font-weight:800;padding:2px 7px;border-radius:5px;}
+
+  .footer-actions{display:flex;justify-content:center;}
+  .reset-btn{background:none;border:1px solid rgba(255,255,255,0.12);color:var(--text-dim);padding:10px 18px;border-radius:99px;font-size:0.85rem;cursor:pointer;font-family:inherit;transition:all .2s ease;}
+  .reset-btn:hover{color:var(--wrong);border-color:var(--wrong);background:rgba(255,92,122,0.06);}
+
+  .complete-card{text-align:center;padding:50px 20px;}
+  .complete-card .emoji{font-size:3rem;margin-bottom:10px;}
+  .complete-card h2{margin:0 0 8px;font-size:1.4rem;}
+  .complete-card p{color:var(--text-dim);margin:0 0 20px;}
+
+  .empty-filter{text-align:center;padding:40px 20px;color:var(--text-dim);}
+  .empty-filter p{margin:0 0 8px;font-size:1.1rem;}
+
+  @media(max-width:380px){
+    .word-display .en-word{font-size:1.9rem;}
+    .quiz-card{padding:24px 16px 20px;}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="app-header">
+    <h1>📚 Học Từ Vựng <span>Tiếng Anh</span></h1>
+    <p>Chọn đáp án đúng để đánh dấu từ đã học</p>
+  </div>
+
+  <nav class="main-nav" style="text-align:center;margin-bottom:8px;">
+    <a href="nguphap.html" style="color:var(--accent);font-weight:700;text-decoration:none;margin-right:12px;">Ngữ pháp</a>
+
+  <div class="filter-bar">
+    <span class="filter-label">Lọc:</span>
+    <div class="filter-btns" id="filterBtns">
+      <button class="flt-btn active" data-type="all">Tất cả</button>
+      <button class="flt-btn" data-type="v">v. Động từ</button>
+      <button class="flt-btn" data-type="n">n. Danh từ</button>
+      <button class="flt-btn" data-type="adj">adj. Tính từ</button>
+      <button class="flt-btn" data-type="adv">adv. Trạng từ</button>
+      <button class="flt-btn" data-type="phrase">phrase. Cụm từ</button>
+      <button class="flt-btn" data-type="prep">prep. Giới từ</button>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-box total"><div class="num" id="statTotal">0</div><div class="label">Trong bộ lọc</div></div>
+    <div class="stat-box learned"><div class="num" id="statLearned">0</div><div class="label">Đã học</div></div>
+    <div class="stat-box remaining"><div class="num" id="statRemaining">0</div><div class="label">Chưa học</div></div>
+  </div>
+
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div id="quizArea"></div>
+
+  <div class="legend">
+    <div class="legend-title">Ký hiệu từ loại</div>
+    <span class="leg-item"><span class="leg-tag wtt-v">v.</span> Động từ</span>
+    <span class="leg-item"><span class="leg-tag wtt-n">n.</span> Danh từ</span>
+    <span class="leg-item"><span class="leg-tag wtt-adj">adj.</span> Tính từ</span>
+    <span class="leg-item"><span class="leg-tag wtt-adv">adv.</span> Trạng từ</span>
+    <span class="leg-item"><span class="leg-tag wtt-phrase">phrase.</span> Cụm từ</span>
+    <span class="leg-item"><span class="leg-tag wtt-prep">prep.</span> Giới từ</span>
+    <span class="leg-item"><span class="leg-tag wtt-pron">pron.</span> Đại từ</span>
+    <span class="leg-item"><span class="leg-tag wtt-conj">conj.</span> Liên từ</span>
+    <span class="leg-item"><span class="leg-tag wtt-num">num.</span> Số từ</span>
+    <span class="leg-item"><span class="level-badge lvl-a1">A1</span> Cơ bản</span>
+    <span class="leg-item"><span class="level-badge lvl-a2">A2</span> Sơ cấp</span>
+  </div>
+
+  <div class="footer-actions">
+    <button class="reset-btn" id="resetBtn">↺ Làm lại từ đầu</button>
+  </div>
+</div>
+
+<script>
+var VOCAB_DATA = [
+{"word":"mother","phonetic":"mát-dờ","meaning":"mẹ","type":"n","level":"a1"},
+{"word":"father","phonetic":"pha-dờ","meaning":"bố","type":"n","level":"a1"},
+{"word":"parents","phonetic":"pe-rừn-s","meaning":"bố mẹ","type":"n","level":"a1"},
+{"word":"brother","phonetic":"b-rá-dờ","meaning":"anh/em trai","type":"n","level":"a1"},
+{"word":"sister","phonetic":"sít-s-tờ","meaning":"chị/em gái","type":"n","level":"a1"},
+{"word":"son","phonetic":"săn","meaning":"con trai","type":"n","level":"a1"},
+{"word":"daughter","phonetic":"đo-tờ","meaning":"con gái","type":"n","level":"a1"},
+{"word":"husband","phonetic":"hắt-z-bần","meaning":"chồng","type":"n","level":"a1"},
+{"word":"wife","phonetic":"oai-ph","meaning":"vợ","type":"n","level":"a1"},
+{"word":"grandparents","phonetic":"g-răn-pe-rừn-s","meaning":"ông bà","type":"n","level":"a1"},
+{"word":"grandfather","phonetic":"g-răn-pha-dờ","meaning":"ông","type":"n","level":"a1"},
+{"word":"grandmother","phonetic":"g-răn-mát-dờ","meaning":"bà","type":"n","level":"a1"},
+{"word":"uncle","phonetic":"ăng-cồ","meaning":"chú/cậu/bác","type":"n","level":"a1"},
+{"word":"aunt","phonetic":"an-t","meaning":"cô/dì/bác","type":"n","level":"a1"},
+{"word":"cousin","phonetic":"cơ-zần","meaning":"anh chị em họ","type":"n","level":"a1"},
+{"word":"nephew","phonetic":"né-phiu","meaning":"cháu trai","type":"n","level":"a2"},
+{"word":"niece","phonetic":"ni-s","meaning":"cháu gái","type":"n","level":"a2"},
+{"word":"friend","phonetic":"ph-ren","meaning":"bạn bè","type":"n","level":"a1"},
+{"word":"neighbour","phonetic":"nây-bờ","meaning":"hàng xóm","type":"n","level":"a2"},
+{"word":"colleague","phonetic":"co-li-g","meaning":"đồng nghiệp","type":"n","level":"a2"},
+{"word":"family","phonetic":"pha-mi-li","meaning":"gia đình","type":"n","level":"a1"},
+{"word":"brother-in-law","phonetic":"b-rá-đờ in lo","meaning":"anh/em rể","type":"n","level":"a2"},
+{"word":"sister-in-law","phonetic":"xít-s-tờ in lo","meaning":"chị/em dâu","type":"n","level":"a2"},
+{"word":"baby","phonetic":"bây-bi","meaning":"em bé","type":"n","level":"a1"},
+{"word":"child","phonetic":"chai-l-đ","meaning":"đứa trẻ","type":"n","level":"a1"},
+{"word":"teenager","phonetic":"ti-nây-giờ","meaning":"thiếu niên","type":"n","level":"a2"},
+{"word":"adult","phonetic":"ơ-đắl-t","meaning":"người lớn","type":"n","level":"a2"},
+{"word":"couple","phonetic":"cắp-pồ","meaning":"cặp đôi","type":"n","level":"a2"},
+{"word":"partner","phonetic":"pát-nờ","meaning":"bạn đời","type":"n","level":"a2"},
+{"word":"people","phonetic":"pi-pồ","meaning":"mọi người","type":"n","level":"a1"},
+{"word":"person","phonetic":"pơ-sần","meaning":"người","type":"n","level":"a1"},
+{"word":"boy","phonetic":"boi","meaning":"chàng trai","type":"n","level":"a1"},
+{"word":"girl","phonetic":"gơn","meaning":"cô gái","type":"n","level":"a1"},
+{"word":"man","phonetic":"man","meaning":"đàn ông","type":"n","level":"a1"},
+{"word":"woman","phonetic":"uu-mần","meaning":"phụ nữ","type":"n","level":"a1"},
+{"word":"friendly","phonetic":"ph-ren-li","meaning":"thân thiện","type":"adj","level":"a1"},
+{"word":"kind","phonetic":"cai-đ","meaning":"tốt bụng","type":"adj","level":"a1"},
+{"word":"funny","phonetic":"phăn-ni","meaning":"hài hước","type":"adj","level":"a1"},
+{"word":"serious","phonetic":"xi-ri-ợt-s","meaning":"nghiêm túc","type":"adj","level":"a2"},
+{"word":"shy","phonetic":"sai","meaning":"nhút nhát","type":"adj","level":"a2"},
+{"word":"confident","phonetic":"con-phi-đần-t","meaning":"tự tin","type":"adj","level":"a2"},
+{"word":"honest","phonetic":"o-nịt-s-t","meaning":"thật thà","type":"adj","level":"a2"},
+{"word":"lazy","phonetic":"lây-zi","meaning":"lười biếng","type":"adj","level":"a1"},
+{"word":"hardworking","phonetic":"hát-uốc-kinh","meaning":"chăm chỉ","type":"adj","level":"a2"},
+{"word":"clever","phonetic":"c-le-vờ","meaning":"thông minh","type":"adj","level":"a2"},
+{"word":"generous","phonetic":"gien-nơ-rợt-s","meaning":"hào phóng","type":"adj","level":"a2"},
+{"word":"patient","phonetic":"pây-shần-t","meaning":"kiên nhẫn","type":"adj","level":"a2"},
+{"word":"introvert","phonetic":"in-t-rô-vớt","meaning":"hướng nội","type":"adj","level":"a2"},
+{"word":"extrovert","phonetic":"éc-x-t-rô-vớt","meaning":"hướng ngoại","type":"adj","level":"a2"},
+{"word":"cheerful","phonetic":"chi-ơ-phun","meaning":"vui vẻ","type":"adj","level":"a2"},
+{"word":"outgoing","phonetic":"ao-t-gâu-inh","meaning":"dễ gần","type":"adj","level":"a2"},
+{"word":"quiet","phonetic":"quai-ợt","meaning":"ít nói","type":"adj","level":"a1"},
+{"word":"brave","phonetic":"b-rây-v","meaning":"dũng cảm","type":"adj","level":"a2"},
+{"word":"polite","phonetic":"pơ-lai-t","meaning":"lịch sự","type":"adj","level":"a2"},
+{"word":"rude","phonetic":"rut","meaning":"thô lỗ","type":"adj","level":"a2"},
+{"word":"selfish","phonetic":"xeo-phít-sh","meaning":"ích kỷ","type":"adj","level":"a2"},
+{"word":"sociable","phonetic":"xâu-shơ-bồ","meaning":"hòa đồng","type":"adj","level":"a2"},
+{"word":"creative","phonetic":"c-ri-ây-típ-v","meaning":"sáng tạo","type":"adj","level":"a2"},
+{"word":"curious","phonetic":"kiu-ri-ợt-s","meaning":"tò mò","type":"adj","level":"a2"},
+{"word":"ambitious","phonetic":"am-bít-shợt-s","meaning":"tham vọng","type":"adj","level":"a2"},
+{"word":"wake up","phonetic":"uếch ấp","meaning":"thức dậy","type":"phrase","level":"a1"},
+{"word":"get up","phonetic":"ghét ấp","meaning":"ra khỏi giường","type":"phrase","level":"a1"},
+{"word":"have breakfast","phonetic":"hép b-rếch-phợt-s-t","meaning":"ăn sáng","type":"phrase","level":"a1"},
+{"word":"have lunch","phonetic":"hép lăn-ch","meaning":"ăn trưa","type":"phrase","level":"a1"},
+{"word":"have dinner","phonetic":"hép đin-nờ","meaning":"ăn tối","type":"phrase","level":"a1"},
+{"word":"go to work","phonetic":"gâu tu uốc","meaning":"đi làm","type":"phrase","level":"a1"},
+{"word":"go to school","phonetic":"gâu tu x-cun","meaning":"đi học","type":"phrase","level":"a1"},
+{"word":"go home","phonetic":"gâu hôm","meaning":"về nhà","type":"phrase","level":"a1"},
+{"word":"go to bed","phonetic":"gâu tu bét","meaning":"đi ngủ","type":"phrase","level":"a1"},
+{"word":"take a shower","phonetic":"tếch ơ shao-ờ","meaning":"tắm vòi","type":"phrase","level":"a1"},
+{"word":"brush teeth","phonetic":"b-rắt-sh ti-th","meaning":"đánh răng","type":"phrase","level":"a1"},
+{"word":"get dressed","phonetic":"ghét đ-rét-s-t","meaning":"mặc quần áo","type":"phrase","level":"a1"},
+{"word":"cook dinner","phonetic":"cúc đin-nờ","meaning":"nấu bữa tối","type":"phrase","level":"a1"},
+{"word":"do homework","phonetic":"đu hôm-uốc","meaning":"làm bài tập","type":"phrase","level":"a1"},
+{"word":"watch TV","phonetic":"oắt-ch ti-vi","meaning":"xem TV","type":"phrase","level":"a1"},
+{"word":"read a book","phonetic":"rít ơ búc","meaning":"đọc sách","type":"phrase","level":"a1"},
+{"word":"check emails","phonetic":"chéc i-mêu-z","meaning":"kiểm tra email","type":"phrase","level":"a2"},
+{"word":"exercise","phonetic":"éc-xơ-sai-z","meaning":"tập thể dục","type":"v","level":"a1"},
+{"word":"go shopping","phonetic":"gâu shóp-pinh","meaning":"đi mua sắm","type":"phrase","level":"a1"},
+{"word":"clean the house","phonetic":"c-lin đờ hao-s","meaning":"dọn nhà","type":"phrase","level":"a2"},
+{"word":"take a walk","phonetic":"tếch ơ uóc-k","meaning":"đi dạo","type":"phrase","level":"a2"},
+{"word":"go camping","phonetic":"gâu cam-pinh","meaning":"đi cắm trại","type":"phrase","level":"a2"},
+{"word":"morning","phonetic":"mo-ninh","meaning":"buổi sáng","type":"n","level":"a1"},
+{"word":"afternoon","phonetic":"áp-tơ-nun","meaning":"buổi chiều","type":"n","level":"a1"},
+{"word":"evening","phonetic":"i-vờ-ninh","meaning":"buổi tối","type":"n","level":"a1"},
+{"word":"night","phonetic":"nai-t","meaning":"ban đêm","type":"n","level":"a1"},
+{"word":"midnight","phonetic":"mít-nai-t","meaning":"nửa đêm","type":"n","level":"a2"},
+{"word":"noon","phonetic":"nun","meaning":"buổi trưa","type":"n","level":"a1"},
+{"word":"weekday","phonetic":"uíc-đây","meaning":"ngày trong tuần","type":"n","level":"a2"},
+{"word":"weekend","phonetic":"uíc-ken","meaning":"cuối tuần","type":"n","level":"a1"},
+{"word":"minute","phonetic":"mi-nịt","meaning":"phút","type":"n","level":"a1"},
+{"word":"hour","phonetic":"ao-ờ","meaning":"giờ","type":"n","level":"a1"},
+{"word":"day","phonetic":"đây","meaning":"ngày","type":"n","level":"a1"},
+{"word":"week","phonetic":"uíc","meaning":"tuần","type":"n","level":"a1"},
+{"word":"month","phonetic":"măn-th","meaning":"tháng","type":"n","level":"a1"},
+{"word":"year","phonetic":"yi-ờ","meaning":"năm","type":"n","level":"a1"},
+{"word":"century","phonetic":"xen-chu-ri","meaning":"thế kỷ","type":"n","level":"a2"},
+{"word":"Monday","phonetic":"măn-đây","meaning":"thứ 2","type":"n","level":"a1"},
+{"word":"Tuesday","phonetic":"tiu-z-đây","meaning":"thứ 3","type":"n","level":"a1"},
+{"word":"Wednesday","phonetic":"uen-z-đây","meaning":"thứ 4","type":"n","level":"a1"},
+{"word":"Thursday","phonetic":"thớt-z-đây","meaning":"thứ 5","type":"n","level":"a1"},
+{"word":"Friday","phonetic":"ph-rai-đây","meaning":"thứ 6","type":"n","level":"a1"},
+{"word":"Saturday","phonetic":"xát-tơ-đây","meaning":"thứ 7","type":"n","level":"a1"},
+{"word":"Sunday","phonetic":"săn-đây","meaning":"Chủ Nhật","type":"n","level":"a1"},
+{"word":"January","phonetic":"gian-niu-ơ-ri","meaning":"tháng Một","type":"n","level":"a1"},
+{"word":"February","phonetic":"phép-b-ru-ơ-ri","meaning":"tháng Hai","type":"n","level":"a1"},
+{"word":"March","phonetic":"ma-ch","meaning":"tháng Ba","type":"n","level":"a1"},
+{"word":"April","phonetic":"ây-p-rồ","meaning":"tháng Tư","type":"n","level":"a1"},
+{"word":"May","phonetic":"mây","meaning":"tháng Năm","type":"n","level":"a1"},
+{"word":"June","phonetic":"giun","meaning":"tháng Sáu","type":"n","level":"a1"},
+{"word":"July","phonetic":"giu-lai","meaning":"tháng Bảy","type":"n","level":"a1"},
+{"word":"August","phonetic":"o-gợt-s-t","meaning":"tháng Tám","type":"n","level":"a1"},
+{"word":"September","phonetic":"xép-tem-bờ","meaning":"tháng Chín","type":"n","level":"a1"},
+{"word":"October","phonetic":"oc-tâu-bờ","meaning":"tháng Mười","type":"n","level":"a1"},
+{"word":"November","phonetic":"nâu-vem-bờ","meaning":"tháng Mười Một","type":"n","level":"a1"},
+{"word":"December","phonetic":"đi-xem-bờ","meaning":"tháng Mười Hai","type":"n","level":"a1"},
+{"word":"spring","phonetic":"x-p-rinh","meaning":"mùa xuân","type":"n","level":"a1"},
+{"word":"summer","phonetic":"xăm-mờ","meaning":"mùa hè","type":"n","level":"a1"},
+{"word":"autumn","phonetic":"o-tầm","meaning":"mùa thu","type":"n","level":"a1"},
+{"word":"winter","phonetic":"uín-tờ","meaning":"mùa đông","type":"n","level":"a1"},
+{"word":"today","phonetic":"tơ-đây","meaning":"hôm nay","type":"adv","level":"a1"},
+{"word":"tomorrow","phonetic":"tơ-mo-râu","meaning":"ngày mai","type":"adv","level":"a1"},
+{"word":"yesterday","phonetic":"yes-tơ-đây","meaning":"hôm qua","type":"adv","level":"a1"},
+{"word":"tonight","phonetic":"tơ-nai-t","meaning":"tối nay","type":"adv","level":"a1"},
+{"word":"soon","phonetic":"sun","meaning":"sớm","type":"adv","level":"a1"},
+{"word":"late","phonetic":"lết","meaning":"muộn","type":"adj","level":"a1"},
+{"word":"early","phonetic":"ơ-li","meaning":"sớm/đầu","type":"adj","level":"a1"},
+{"word":"always","phonetic":"ôn-uây-z","meaning":"luôn luôn","type":"adv","level":"a1"},
+{"word":"usually","phonetic":"iu-giu-ơ-li","meaning":"thường","type":"adv","level":"a1"},
+{"word":"often","phonetic":"óp-ph-tần","meaning":"thường xuyên","type":"adv","level":"a1"},
+{"word":"sometimes","phonetic":"săm-tham-z","meaning":"đôi khi","type":"adv","level":"a1"},
+{"word":"rarely","phonetic":"re-li","meaning":"hiếm khi","type":"adv","level":"a2"},
+{"word":"never","phonetic":"ne-vờ","meaning":"không bao giờ","type":"adv","level":"a1"},
+{"word":"hardly","phonetic":"hát-li","meaning":"hầu như không","type":"adv","level":"a2"},
+{"word":"bread","phonetic":"b-rét","meaning":"bánh mì","type":"n","level":"a1"},
+{"word":"rice","phonetic":"rai-s","meaning":"cơm/gạo","type":"n","level":"a1"},
+{"word":"pasta","phonetic":"pát-x-tờ","meaning":"mì ống","type":"n","level":"a1"},
+{"word":"soup","phonetic":"súp","meaning":"súp","type":"n","level":"a1"},
+{"word":"salad","phonetic":"xa-lợt","meaning":"salad","type":"n","level":"a1"},
+{"word":"sandwich","phonetic":"xan-uých","meaning":"bánh mì kẹp","type":"n","level":"a1"},
+{"word":"pizza","phonetic":"pít-zờ","meaning":"pizza","type":"n","level":"a1"},
+{"word":"burger","phonetic":"bơ-gờ","meaning":"bánh burger","type":"n","level":"a1"},
+{"word":"chicken","phonetic":"chích-cần","meaning":"gà","type":"n","level":"a1"},
+{"word":"fish","phonetic":"phích-sh","meaning":"cá","type":"n","level":"a1"},
+{"word":"meat","phonetic":"mít-t","meaning":"thịt","type":"n","level":"a1"},
+{"word":"beef","phonetic":"bíp-ph","meaning":"thịt bò","type":"n","level":"a1"},
+{"word":"pork","phonetic":"poóc-k","meaning":"thịt heo","type":"n","level":"a1"},
+{"word":"egg","phonetic":"éc-g","meaning":"trứng","type":"n","level":"a1"},
+{"word":"cheese","phonetic":"chi-z","meaning":"phô mai","type":"n","level":"a1"},
+{"word":"butter","phonetic":"bắt-tờ","meaning":"bơ","type":"n","level":"a1"},
+{"word":"sugar","phonetic":"shu-gờ","meaning":"đường","type":"n","level":"a1"},
+{"word":"salt","phonetic":"sôn-t","meaning":"muối","type":"n","level":"a1"},
+{"word":"pepper","phonetic":"pép-pờ","meaning":"tiêu","type":"n","level":"a1"},
+{"word":"oil","phonetic":"oi-l","meaning":"dầu ăn","type":"n","level":"a1"},
+{"word":"fruit","phonetic":"ph-rút","meaning":"hoa quả","type":"n","level":"a1"},
+{"word":"vegetables","phonetic":"vét-giơ-tơ-bồ-z","meaning":"rau củ","type":"n","level":"a1"},
+{"word":"apple","phonetic":"áp-pồ","meaning":"táo","type":"n","level":"a1"},
+{"word":"banana","phonetic":"bơ-na-nờ","meaning":"chuối","type":"n","level":"a1"},
+{"word":"orange","phonetic":"o-rìn-gi","meaning":"cam","type":"n","level":"a1"},
+{"word":"strawberry","phonetic":"s-t-ro-be-ri","meaning":"dâu tây","type":"n","level":"a1"},
+{"word":"tomato","phonetic":"tơ-ma-tâu","meaning":"cà chua","type":"n","level":"a1"},
+{"word":"potato","phonetic":"pơ-tây-tâu","meaning":"khoai tây","type":"n","level":"a1"},
+{"word":"carrot","phonetic":"ca-rợt","meaning":"cà rốt","type":"n","level":"a1"},
+{"word":"onion","phonetic":"ăn-ni-ần","meaning":"hành tây","type":"n","level":"a1"},
+{"word":"garlic","phonetic":"ga-líc","meaning":"tỏi","type":"n","level":"a2"},
+{"word":"mushroom","phonetic":"mắt-sh-rum","meaning":"nấm","type":"n","level":"a2"},
+{"word":"corn","phonetic":"co-n","meaning":"ngô/bắp","type":"n","level":"a2"},
+{"word":"lemon","phonetic":"le-mần","meaning":"chanh vàng","type":"n","level":"a2"},
+{"word":"grape","phonetic":"g-rêp","meaning":"nho","type":"n","level":"a2"},
+{"word":"mango","phonetic":"man-gâu","meaning":"xoài","type":"n","level":"a2"},
+{"word":"watermelon","phonetic":"uo-tờ-me-lần","meaning":"dưa hấu","type":"n","level":"a2"},
+{"word":"pineapple","phonetic":"pai-náp-pồ","meaning":"dứa","type":"n","level":"a2"},
+{"word":"water","phonetic":"uo-tờ","meaning":"nước","type":"n","level":"a1"},
+{"word":"tea","phonetic":"ti","meaning":"trà","type":"n","level":"a1"},
+{"word":"coffee","phonetic":"co-phi","meaning":"cà phê","type":"n","level":"a1"},
+{"word":"juice","phonetic":"giút-s","meaning":"nước ép","type":"n","level":"a1"},
+{"word":"milk","phonetic":"miu-k","meaning":"sữa","type":"n","level":"a1"},
+{"word":"soda","phonetic":"sâu-đờ","meaning":"nước ngọt có ga","type":"n","level":"a1"},
+{"word":"beer","phonetic":"bi-ờ","meaning":"bia","type":"n","level":"a2"},
+{"word":"wine","phonetic":"oai-n","meaning":"rượu vang","type":"n","level":"a2"},
+{"word":"eat out","phonetic":"ít ao-t","meaning":"ăn ngoài","type":"phrase","level":"a2"},
+{"word":"order food","phonetic":"o-đờ phút","meaning":"gọi đồ ăn","type":"phrase","level":"a2"},
+{"word":"fast food","phonetic":"phát-s-t phút","meaning":"đồ ăn nhanh","type":"n","level":"a1"},
+{"word":"home-cooked meal","phonetic":"hôm-cúc-t miêu","meaning":"bữa ăn nấu ở nhà","type":"n","level":"a2"},
+{"word":"recipe","phonetic":"ré-xi-pi","meaning":"công thức nấu ăn","type":"n","level":"a2"},
+{"word":"ingredient","phonetic":"in-g-ri-đi-ơn-t","meaning":"nguyên liệu","type":"n","level":"a2"},
+{"word":"dessert","phonetic":"đi-zớt","meaning":"món tráng miệng","type":"n","level":"a2"},
+{"word":"snack","phonetic":"x-nác","meaning":"đồ ăn nhẹ","type":"n","level":"a2"},
+{"word":"meal","phonetic":"miu","meaning":"bữa ăn","type":"n","level":"a1"},
+{"word":"dish","phonetic":"đít-sh","meaning":"món ăn","type":"n","level":"a2"},
+{"word":"menu","phonetic":"men-niu","meaning":"thực đơn","type":"n","level":"a2"},
+{"word":"bank","phonetic":"bang-k","meaning":"ngân hàng","type":"n","level":"a1"},
+{"word":"supermarket","phonetic":"su-pơ-ma-kịt","meaning":"siêu thị","type":"n","level":"a1"},
+{"word":"hospital","phonetic":"hót-s-pi-tồ","meaning":"bệnh viện","type":"n","level":"a1"},
+{"word":"school","phonetic":"x-cun","meaning":"trường học","type":"n","level":"a1"},
+{"word":"library","phonetic":"lai-b-rơ-ri","meaning":"thư viện","type":"n","level":"a1"},
+{"word":"park","phonetic":"pa-k","meaning":"công viên","type":"n","level":"a1"},
+{"word":"restaurant","phonetic":"rét-s-tơ-ròn-t","meaning":"nhà hàng","type":"n","level":"a1"},
+{"word":"café","phonetic":"ca-phê","meaning":"quán cà phê","type":"n","level":"a1"},
+{"word":"hotel","phonetic":"hâu-teo","meaning":"khách sạn","type":"n","level":"a1"},
+{"word":"airport","phonetic":"e-po-t","meaning":"sân bay","type":"n","level":"a1"},
+{"word":"train station","phonetic":"t-rên x-tây-shần","meaning":"ga tàu","type":"n","level":"a1"},
+{"word":"bus stop","phonetic":"bát-s x-tóp","meaning":"trạm xe buýt","type":"n","level":"a1"},
+{"word":"museum","phonetic":"miu-zi-ầm","meaning":"bảo tàng","type":"n","level":"a2"},
+{"word":"cinema","phonetic":"xi-nơ-mờ","meaning":"rạp chiếu phim","type":"n","level":"a1"},
+{"word":"gym","phonetic":"gim","meaning":"phòng tập thể dục","type":"n","level":"a2"},
+{"word":"pharmacy","phonetic":"pha-mơ-xi","meaning":"nhà thuốc","type":"n","level":"a2"},
+{"word":"post office","phonetic":"pốt-s o-phít-s","meaning":"bưu điện","type":"n","level":"a2"},
+{"word":"petrol station","phonetic":"pe-t-rồn x-tây-shần","meaning":"trạm xăng","type":"n","level":"a2"},
+{"word":"zoo","phonetic":"zu","meaning":"sở thú","type":"n","level":"a1"},
+{"word":"theatre","phonetic":"thi-ơ-tờ","meaning":"rạp hát","type":"n","level":"a2"},
+{"word":"market","phonetic":"ma-kịt","meaning":"chợ","type":"n","level":"a1"},
+{"word":"city","phonetic":"xi-ti","meaning":"thành phố","type":"n","level":"a1"},
+{"word":"town","phonetic":"tao-n","meaning":"thị trấn","type":"n","level":"a1"},
+{"word":"village","phonetic":"vi-lị-gi","meaning":"làng","type":"n","level":"a2"},
+{"word":"country","phonetic":"căn-t-ri","meaning":"đất nước","type":"n","level":"a1"},
+{"word":"capital","phonetic":"cáp-pi-tồ","meaning":"thủ đô","type":"n","level":"a2"},
+{"word":"street","phonetic":"s-t-rit","meaning":"đường phố","type":"n","level":"a1"},
+{"word":"road","phonetic":"râu-đ","meaning":"con đường","type":"n","level":"a1"},
+{"word":"bridge","phonetic":"b-rít-gi","meaning":"cây cầu","type":"n","level":"a2"},
+{"word":"building","phonetic":"bi-đinh","meaning":"toà nhà","type":"n","level":"a1"},
+{"word":"factory","phonetic":"phác-tơ-ri","meaning":"nhà máy","type":"n","level":"a2"},
+{"word":"office","phonetic":"o-phít-s","meaning":"văn phòng","type":"n","level":"a2"},
+{"word":"church","phonetic":"chơ-ch","meaning":"nhà thờ","type":"n","level":"a2"},
+{"word":"temple","phonetic":"tem-pồ","meaning":"chùa/đền","type":"n","level":"a2"},
+{"word":"swimming pool","phonetic":"suím-ming pun","meaning":"bể bơi","type":"n","level":"a2"},
+{"word":"car","phonetic":"ca","meaning":"xe hơi","type":"n","level":"a1"},
+{"word":"bus","phonetic":"bát-s","meaning":"xe buýt","type":"n","level":"a1"},
+{"word":"train","phonetic":"t-rên","meaning":"tàu hoả","type":"n","level":"a1"},
+{"word":"plane","phonetic":"p-lên","meaning":"máy bay","type":"n","level":"a1"},
+{"word":"bike","phonetic":"bai-k","meaning":"xe đạp","type":"n","level":"a1"},
+{"word":"motorbike","phonetic":"mâu-tơ-bai-k","meaning":"xe máy","type":"n","level":"a1"},
+{"word":"taxi","phonetic":"tắc-xi","meaning":"taxi","type":"n","level":"a1"},
+{"word":"subway","phonetic":"sắp-uây","meaning":"tàu điện ngầm","type":"n","level":"a2"},
+{"word":"ferry","phonetic":"phe-ri","meaning":"phà","type":"n","level":"a2"},
+{"word":"truck","phonetic":"t-rắc","meaning":"xe tải","type":"n","level":"a2"},
+{"word":"helicopter","phonetic":"he-li-cop-tờ","meaning":"trực thăng","type":"n","level":"a2"},
+{"word":"ship","phonetic":"shíp","meaning":"tàu thuỷ","type":"n","level":"a2"},
+{"word":"go on holiday","phonetic":"gâu on ho-li-đây","meaning":"đi nghỉ","type":"phrase","level":"a2"},
+{"word":"book a ticket","phonetic":"búc ơ tíc-kịt","meaning":"đặt vé","type":"phrase","level":"a2"},
+{"word":"check in","phonetic":"chéc in","meaning":"làm thủ tục vào","type":"phrase","level":"a2"},
+{"word":"check out","phonetic":"chéc ao-t","meaning":"trả phòng","type":"phrase","level":"a2"},
+{"word":"sightseeing","phonetic":"sai-t-xi-inh","meaning":"tham quan","type":"v","level":"a2"},
+{"word":"get lost","phonetic":"ghét lót-s-t","meaning":"bị lạc","type":"phrase","level":"a2"},
+{"word":"ask for directions","phonetic":"át-s-k pho đai-réc-shần-z","meaning":"hỏi đường","type":"phrase","level":"a2"},
+{"word":"turn left","phonetic":"tơn lép-ph-t","meaning":"rẽ trái","type":"phrase","level":"a2"},
+{"word":"turn right","phonetic":"tơn rai-t","meaning":"rẽ phải","type":"phrase","level":"a2"},
+{"word":"go straight","phonetic":"gâu x-t-rết","meaning":"đi thẳng","type":"phrase","level":"a2"},
+{"word":"traffic jam","phonetic":"t-rá-phíc giam","meaning":"kẹt xe","type":"n","level":"a2"},
+{"word":"traffic light","phonetic":"t-rá-phíc lai-t","meaning":"đèn giao thông","type":"n","level":"a2"},
+{"word":"crossroads","phonetic":"c-rót-s-rôt-z","meaning":"ngã tư","type":"n","level":"a2"},
+{"word":"map","phonetic":"máp","meaning":"bản đồ","type":"n","level":"a1"},
+{"word":"ticket","phonetic":"tíc-kịt","meaning":"vé","type":"n","level":"a1"},
+{"word":"passport","phonetic":"pát-s-pot","meaning":"hộ chiếu","type":"n","level":"a2"},
+{"word":"luggage","phonetic":"lắc-gị-gi","meaning":"hành lý","type":"n","level":"a2"},
+{"word":"suitcase","phonetic":"sút-kếch-s","meaning":"va li","type":"n","level":"a2"},
+{"word":"living room","phonetic":"li-vinh rum","meaning":"phòng khách","type":"n","level":"a1"},
+{"word":"bedroom","phonetic":"bét-rum","meaning":"phòng ngủ","type":"n","level":"a1"},
+{"word":"kitchen","phonetic":"kít-chần","meaning":"nhà bếp","type":"n","level":"a1"},
+{"word":"bathroom","phonetic":"bát-th-rum","meaning":"phòng tắm","type":"n","level":"a1"},
+{"word":"dining room","phonetic":"đai-ninh rum","meaning":"phòng ăn","type":"n","level":"a1"},
+{"word":"garden","phonetic":"ga-đần","meaning":"vườn","type":"n","level":"a1"},
+{"word":"garage","phonetic":"ga-ra-giờ","meaning":"nhà để xe","type":"n","level":"a2"},
+{"word":"balcony","phonetic":"ban-cơ-ni","meaning":"ban công","type":"n","level":"a2"},
+{"word":"hall","phonetic":"hôn","meaning":"hành lang","type":"n","level":"a2"},
+{"word":"sofa","phonetic":"sâu-phờ","meaning":"ghế sofa","type":"n","level":"a1"},
+{"word":"table","phonetic":"tây-bồ","meaning":"bàn","type":"n","level":"a1"},
+{"word":"chair","phonetic":"che","meaning":"ghế","type":"n","level":"a1"},
+{"word":"bed","phonetic":"bét","meaning":"giường","type":"n","level":"a1"},
+{"word":"wardrobe","phonetic":"uo-đ-rốp","meaning":"tủ quần áo","type":"n","level":"a2"},
+{"word":"bookshelf","phonetic":"búc-sheo-ph","meaning":"giá sách","type":"n","level":"a2"},
+{"word":"lamp","phonetic":"lam-p","meaning":"đèn","type":"n","level":"a1"},
+{"word":"mirror","phonetic":"mi-rờ","meaning":"gương","type":"n","level":"a1"},
+{"word":"curtains","phonetic":"cơ-tần-z","meaning":"rèm cửa","type":"n","level":"a2"},
+{"word":"carpet","phonetic":"ca-pịt","meaning":"thảm","type":"n","level":"a2"},
+{"word":"fridge","phonetic":"ph-rít-gi","meaning":"tủ lạnh","type":"n","level":"a1"},
+{"word":"washing machine","phonetic":"uót-shinh mơ-shin","meaning":"máy giặt","type":"n","level":"a2"},
+{"word":"microwave","phonetic":"mai-c-rô-uây-v","meaning":"lò vi sóng","type":"n","level":"a2"},
+{"word":"dishwasher","phonetic":"đít-sh-uót-shờ","meaning":"máy rửa bát","type":"n","level":"a2"},
+{"word":"heater","phonetic":"hít-tờ","meaning":"máy sưởi","type":"n","level":"a2"},
+{"word":"air conditioner","phonetic":"e con-đi-shần-ờ","meaning":"máy điều hoà","type":"n","level":"a2"},
+{"word":"television","phonetic":"te-li-vi-giần","meaning":"tivi","type":"n","level":"a1"},
+{"word":"key","phonetic":"ki","meaning":"chìa khoá","type":"n","level":"a1"},
+{"word":"door","phonetic":"đo","meaning":"cửa","type":"n","level":"a1"},
+{"word":"window","phonetic":"uín-đâu","meaning":"cửa sổ","type":"n","level":"a1"},
+{"word":"wall","phonetic":"uôn","meaning":"tường","type":"n","level":"a1"},
+{"word":"floor","phonetic":"ph-lo","meaning":"sàn nhà","type":"n","level":"a1"},
+{"word":"ceiling","phonetic":"xi-linh","meaning":"trần nhà","type":"n","level":"a2"},
+{"word":"roof","phonetic":"ruf","meaning":"mái nhà","type":"n","level":"a2"},
+{"word":"stairs","phonetic":"x-te","meaning":"cầu thang","type":"n","level":"a2"},
+{"word":"vase","phonetic":"va-z","meaning":"cái bình","type":"n","level":"a2"},
+{"word":"teacher","phonetic":"tít-chờ","meaning":"giáo viên","type":"n","level":"a1"},
+{"word":"doctor","phonetic":"đóc-tờ","meaning":"bác sĩ","type":"n","level":"a1"},
+{"word":"nurse","phonetic":"nớt-s","meaning":"y tá","type":"n","level":"a1"},
+{"word":"engineer","phonetic":"en-gi-ni-ờ","meaning":"kỹ sư","type":"n","level":"a2"},
+{"word":"lawyer","phonetic":"loi-ờ","meaning":"luật sư","type":"n","level":"a2"},
+{"word":"accountant","phonetic":"ơ-cao-tần-t","meaning":"kế toán","type":"n","level":"a2"},
+{"word":"manager","phonetic":"ma-ni-giờ","meaning":"quản lý","type":"n","level":"a2"},
+{"word":"chef","phonetic":"shep","meaning":"đầu bếp","type":"n","level":"a2"},
+{"word":"driver","phonetic":"đ-rai-vờ","meaning":"tài xế","type":"n","level":"a1"},
+{"word":"farmer","phonetic":"pha-mờ","meaning":"nông dân","type":"n","level":"a1"},
+{"word":"artist","phonetic":"a-tít-s-t","meaning":"nghệ sĩ","type":"n","level":"a2"},
+{"word":"musician","phonetic":"miu-zi-shần","meaning":"nhạc sĩ","type":"n","level":"a2"},
+{"word":"scientist","phonetic":"sai-ơn-tít-s-t","meaning":"nhà khoa học","type":"n","level":"a2"},
+{"word":"journalist","phonetic":"giơ-nơ-lít-s-t","meaning":"nhà báo","type":"n","level":"a2"},
+{"word":"pilot","phonetic":"pai-lợt","meaning":"phi công","type":"n","level":"a2"},
+{"word":"police officer","phonetic":"pơ-lít-s o-phi-sờ","meaning":"cảnh sát","type":"n","level":"a2"},
+{"word":"firefighter","phonetic":"phai-ờ-phai-tờ","meaning":"lính cứu hoả","type":"n","level":"a2"},
+{"word":"shop assistant","phonetic":"shóp ơ-sít-s-tần-t","meaning":"nhân viên bán hàng","type":"n","level":"a2"},
+{"word":"receptionist","phonetic":"ri-xép-shần-nít-s-t","meaning":"lễ tân","type":"n","level":"a2"},
+{"word":"dentist","phonetic":"đen-tít-s-t","meaning":"nha sĩ","type":"n","level":"a2"},
+{"word":"mechanic","phonetic":"mơ-ca-níc","meaning":"thợ máy","type":"n","level":"a2"},
+{"word":"architect","phonetic":"a-ki-tếch-t","meaning":"kiến trúc sư","type":"n","level":"a2"},
+{"word":"photographer","phonetic":"phơ-to-g-rơ-phờ","meaning":"nhiếp ảnh gia","type":"n","level":"a2"},
+{"word":"waiter","phonetic":"uây-tờ","meaning":"bồi bàn nam","type":"n","level":"a2"},
+{"word":"waitress","phonetic":"uây-t-rịt-s","meaning":"bồi bàn nữ","type":"n","level":"a2"},
+{"word":"secretary","phonetic":"xéc-crơ-t-ri","meaning":"thư ký","type":"n","level":"a2"},
+{"word":"work full-time","phonetic":"uốc phun-tham","meaning":"làm toàn thời gian","type":"phrase","level":"a2"},
+{"word":"work part-time","phonetic":"uốc pát-tham","meaning":"làm bán thời gian","type":"phrase","level":"a2"},
+{"word":"apply for a job","phonetic":"ơ-p-lai pho ơ gióp","meaning":"nộp đơn xin việc","type":"phrase","level":"a2"},
+{"word":"get a promotion","phonetic":"ghét ơ p-rô-mâu-shần","meaning":"được thăng chức","type":"phrase","level":"a2"},
+{"word":"earn a salary","phonetic":"ơn ơ xa-lơ-ri","meaning":"kiếm lương","type":"phrase","level":"a2"},
+{"word":"retire","phonetic":"ri-tai-ờ","meaning":"nghỉ hưu","type":"v","level":"a2"},
+{"word":"salary","phonetic":"xa-lơ-ri","meaning":"lương","type":"n","level":"a2"},
+{"word":"job","phonetic":"giop","meaning":"công việc","type":"n","level":"a1"},
+{"word":"career","phonetic":"cơ-ri-ờ","meaning":"sự nghiệp","type":"n","level":"a2"},
+{"word":"company","phonetic":"căm-pơ-ni","meaning":"công ty","type":"n","level":"a2"},
+{"word":"boss","phonetic":"bót-s","meaning":"sếp","type":"n","level":"a2"},
+{"word":"employee","phonetic":"im-ploi-i","meaning":"nhân viên","type":"n","level":"a2"},
+{"word":"head","phonetic":"hét","meaning":"đầu","type":"n","level":"a1"},
+{"word":"face","phonetic":"phây-s","meaning":"mặt","type":"n","level":"a1"},
+{"word":"eye","phonetic":"ai","meaning":"mắt","type":"n","level":"a1"},
+{"word":"ear","phonetic":"i-ờ","meaning":"tai","type":"n","level":"a1"},
+{"word":"nose","phonetic":"nâu-z","meaning":"mũi","type":"n","level":"a1"},
+{"word":"mouth","phonetic":"mao-th","meaning":"miệng","type":"n","level":"a1"},
+{"word":"tooth","phonetic":"tu-th","meaning":"răng (một chiếc)","type":"n","level":"a1"},
+{"word":"teeth","phonetic":"ti-th","meaning":"răng (nhiều)","type":"n","level":"a1"},
+{"word":"neck","phonetic":"néc","meaning":"cổ","type":"n","level":"a1"},
+{"word":"shoulder","phonetic":"shâu-đờ","meaning":"vai","type":"n","level":"a1"},
+{"word":"arm","phonetic":"am","meaning":"cánh tay","type":"n","level":"a1"},
+{"word":"hand","phonetic":"han-đ","meaning":"bàn tay","type":"n","level":"a1"},
+{"word":"finger","phonetic":"phing-gờ","meaning":"ngón tay","type":"n","level":"a1"},
+{"word":"chest","phonetic":"chét-s-t","meaning":"ngực","type":"n","level":"a1"},
+{"word":"stomach","phonetic":"x-tơ-mợc","meaning":"bụng","type":"n","level":"a1"},
+{"word":"back","phonetic":"bác-c","meaning":"lưng","type":"n","level":"a1"},
+{"word":"leg","phonetic":"léc","meaning":"chân","type":"n","level":"a1"},
+{"word":"knee","phonetic":"ni","meaning":"đầu gối","type":"n","level":"a2"},
+{"word":"foot","phonetic":"phút","meaning":"bàn chân","type":"n","level":"a1"},
+{"word":"toe","phonetic":"tâu","meaning":"ngón chân","type":"n","level":"a2"},
+{"word":"hair","phonetic":"he","meaning":"tóc","type":"n","level":"a1"},
+{"word":"skin","phonetic":"x-kin","meaning":"da","type":"n","level":"a2"},
+{"word":"heart","phonetic":"hát","meaning":"tim","type":"n","level":"a2"},
+{"word":"lung","phonetic":"lăng","meaning":"phổi","type":"n","level":"a2"},
+{"word":"headache","phonetic":"hét-đếch","meaning":"đau đầu","type":"n","level":"a2"},
+{"word":"stomachache","phonetic":"x-tơ-mợc-kếch","meaning":"đau bụng","type":"n","level":"a2"},
+{"word":"toothache","phonetic":"tu-th-kếch","meaning":"đau răng","type":"n","level":"a2"},
+{"word":"backache","phonetic":"bác-kếch","meaning":"đau lưng","type":"n","level":"a2"},
+{"word":"cold","phonetic":"câu-đ","meaning":"cảm lạnh","type":"n","level":"a1"},
+{"word":"flu","phonetic":"ph-lu","meaning":"cúm","type":"n","level":"a2"},
+{"word":"fever","phonetic":"phi-vờ","meaning":"sốt","type":"n","level":"a2"},
+{"word":"cough","phonetic":"cóp-ph","meaning":"ho","type":"n","level":"a2"},
+{"word":"sore throat","phonetic":"so th-rốt","meaning":"đau họng","type":"n","level":"a2"},
+{"word":"tired","phonetic":"tai-ợt","meaning":"mệt mỏi","type":"adj","level":"a1"},
+{"word":"allergic","phonetic":"ơ-lơ-gíc","meaning":"bị dị ứng","type":"adj","level":"a2"},
+{"word":"injured","phonetic":"in-giợt","meaning":"bị thương","type":"adj","level":"a2"},
+{"word":"feel better","phonetic":"phiu bét-tờ","meaning":"cảm thấy tốt hơn","type":"phrase","level":"a2"},
+{"word":"see a doctor","phonetic":"xi ơ đóc-tờ","meaning":"đi khám bác sĩ","type":"phrase","level":"a2"},
+{"word":"take medicine","phonetic":"tếch mê-đi-xìn","meaning":"uống thuốc","type":"phrase","level":"a2"},
+{"word":"stay in bed","phonetic":"x-tây in bét","meaning":"nghỉ ngơi trên giường","type":"phrase","level":"a2"},
+{"word":"get enough sleep","phonetic":"ghét i-nắp x-líp","meaning":"ngủ đủ giấc","type":"phrase","level":"a2"},
+{"word":"eat healthy","phonetic":"ít heo-thi","meaning":"ăn lành mạnh","type":"phrase","level":"a2"},
+{"word":"medicine","phonetic":"mé-đi-xìn","meaning":"thuốc","type":"n","level":"a2"},
+{"word":"healthy","phonetic":"heo-thi","meaning":"khoẻ mạnh","type":"adj","level":"a1"},
+{"word":"sick","phonetic":"xíc","meaning":"ốm","type":"adj","level":"a1"},
+{"word":"pain","phonetic":"pên","meaning":"cơn đau","type":"n","level":"a2"},
+{"word":"operation","phonetic":"o-pơ-rây-shần","meaning":"phẫu thuật","type":"n","level":"a2"},
+{"word":"reading","phonetic":"rí-đinh","meaning":"đọc sách","type":"n","level":"a1"},
+{"word":"cooking","phonetic":"cúc-kinh","meaning":"nấu ăn","type":"n","level":"a1"},
+{"word":"painting","phonetic":"pên-tinh","meaning":"vẽ tranh","type":"n","level":"a2"},
+{"word":"photography","phonetic":"phơ-to-g-rơ-phi","meaning":"chụp ảnh","type":"n","level":"a2"},
+{"word":"travelling","phonetic":"t-ra-vờ-linh","meaning":"du lịch","type":"n","level":"a1"},
+{"word":"gardening","phonetic":"ga-đần-ninh","meaning":"làm vườn","type":"n","level":"a2"},
+{"word":"cycling","phonetic":"sai-c-linh","meaning":"đạp xe","type":"n","level":"a2"},
+{"word":"swimming","phonetic":"suím-minh","meaning":"bơi lội","type":"n","level":"a1"},
+{"word":"dancing","phonetic":"đan-xinh","meaning":"nhảy múa","type":"n","level":"a1"},
+{"word":"singing","phonetic":"xing-inh","meaning":"hát","type":"n","level":"a1"},
+{"word":"playing guitar","phonetic":"p-lây-inh ghi-ta","meaning":"chơi đàn guitar","type":"phrase","level":"a2"},
+{"word":"playing chess","phonetic":"p-lây-inh chét-s","meaning":"chơi cờ","type":"phrase","level":"a2"},
+{"word":"shopping","phonetic":"shóp-pinh","meaning":"đi mua sắm","type":"n","level":"a1"},
+{"word":"watching movies","phonetic":"oắt-chinh mu-vi-z","meaning":"xem phim","type":"phrase","level":"a1"},
+{"word":"hiking","phonetic":"hai-kinh","meaning":"đi bộ đường dài","type":"n","level":"a2"},
+{"word":"gaming","phonetic":"gêm-minh","meaning":"chơi game","type":"n","level":"a1"},
+{"word":"football","phonetic":"phút-bôn","meaning":"bóng đá","type":"n","level":"a1"},
+{"word":"basketball","phonetic":"bát-s-kịt-bôn","meaning":"bóng rổ","type":"n","level":"a1"},
+{"word":"tennis","phonetic":"te-nít-s","meaning":"tennis","type":"n","level":"a1"},
+{"word":"volleyball","phonetic":"vo-li-bôn","meaning":"bóng chuyền","type":"n","level":"a1"},
+{"word":"badminton","phonetic":"bát-min-tần","meaning":"cầu lông","type":"n","level":"a1"},
+{"word":"running","phonetic":"răn-ninh","meaning":"chạy bộ","type":"n","level":"a1"},
+{"word":"yoga","phonetic":"iô-gà","meaning":"yoga","type":"n","level":"a1"},
+{"word":"team","phonetic":"tim","meaning":"đội/nhóm","type":"n","level":"a1"},
+{"word":"match","phonetic":"mát-ch","meaning":"trận đấu","type":"n","level":"a2"},
+{"word":"score","phonetic":"x-co","meaning":"điểm số","type":"n","level":"a2"},
+{"word":"win","phonetic":"uín","meaning":"thắng","type":"v","level":"a1"},
+{"word":"lose","phonetic":"lu-z","meaning":"thua","type":"v","level":"a1"},
+{"word":"draw","phonetic":"đ-ro","meaning":"hoà","type":"v","level":"a2"},
+{"word":"player","phonetic":"p-lây-ờ","meaning":"người chơi","type":"n","level":"a1"},
+{"word":"coach","phonetic":"câu-ch","meaning":"huấn luyện viên","type":"n","level":"a2"},
+{"word":"stadium","phonetic":"x-tây-đi-ầm","meaning":"sân vận động","type":"n","level":"a2"},
+{"word":"medal","phonetic":"mé-đồ","meaning":"huy chương","type":"n","level":"a2"},
+{"word":"trophy","phonetic":"t-rô-phi","meaning":"cúp/phần thưởng","type":"n","level":"a2"},
+{"word":"hobby","phonetic":"ho-bi","meaning":"sở thích","type":"n","level":"a1"},
+{"word":"interest","phonetic":"in-t-rịt-s-t","meaning":"mối quan tâm","type":"n","level":"a2"},
+{"word":"talent","phonetic":"tao-lần-t","meaning":"tài năng","type":"n","level":"a2"},
+{"word":"shop","phonetic":"shóp","meaning":"cửa hàng","type":"n","level":"a1"},
+{"word":"price","phonetic":"p-rai-s","meaning":"giá cả","type":"n","level":"a1"},
+{"word":"cheap","phonetic":"chíp","meaning":"rẻ","type":"adj","level":"a1"},
+{"word":"expensive","phonetic":"íc-s-pen-xíp","meaning":"đắt","type":"adj","level":"a1"},
+{"word":"sale","phonetic":"xêu","meaning":"giảm giá","type":"n","level":"a2"},
+{"word":"discount","phonetic":"đít-s-cao-t","meaning":"chiết khấu","type":"n","level":"a2"},
+{"word":"receipt","phonetic":"ri-xít","meaning":"hoá đơn","type":"n","level":"a2"},
+{"word":"cash","phonetic":"cát-sh","meaning":"tiền mặt","type":"n","level":"a1"},
+{"word":"credit card","phonetic":"c-ré-địt cạt","meaning":"thẻ tín dụng","type":"n","level":"a2"},
+{"word":"change","phonetic":"chên-gi","meaning":"tiền thừa","type":"n","level":"a2"},
+{"word":"try on","phonetic":"t-rai on","meaning":"thử (quần áo)","type":"phrase","level":"a2"},
+{"word":"pay for","phonetic":"pây pho","meaning":"trả tiền cho","type":"phrase","level":"a2"},
+{"word":"buy","phonetic":"bai","meaning":"mua","type":"v","level":"a1"},
+{"word":"sell","phonetic":"xeo","meaning":"bán","type":"v","level":"a1"},
+{"word":"spend","phonetic":"x-pen-đ","meaning":"chi tiêu","type":"v","level":"a2"},
+{"word":"save","phonetic":"xây-v","meaning":"tiết kiệm","type":"v","level":"a1"},
+{"word":"size","phonetic":"sai-z","meaning":"kích cỡ","type":"n","level":"a2"},
+{"word":"colour","phonetic":"căl-lờ","meaning":"màu sắc","type":"n","level":"a1"},
+{"word":"brand","phonetic":"b-ran-đ","meaning":"thương hiệu","type":"n","level":"a2"},
+{"word":"refund","phonetic":"ri-phăn-đ","meaning":"hoàn tiền","type":"n","level":"a2"},
+{"word":"exchange","phonetic":"íc-x-chên-gi","meaning":"đổi hàng","type":"v","level":"a2"},
+{"word":"bill","phonetic":"biu","meaning":"hoá đơn/tiền","type":"n","level":"a2"},
+{"word":"coin","phonetic":"coi-n","meaning":"đồng xu","type":"n","level":"a2"},
+{"word":"wallet","phonetic":"uo-lịt","meaning":"ví","type":"n","level":"a2"},
+{"word":"shirt","phonetic":"shớt","meaning":"áo sơ mi","type":"n","level":"a1"},
+{"word":"T-shirt","phonetic":"ti-shớt","meaning":"áo phông","type":"n","level":"a1"},
+{"word":"trousers","phonetic":"t-rao-zờ-z","meaning":"quần dài","type":"n","level":"a1"},
+{"word":"jeans","phonetic":"gin-z","meaning":"quần jeans","type":"n","level":"a1"},
+{"word":"dress","phonetic":"đ-rét-s","meaning":"váy liền","type":"n","level":"a1"},
+{"word":"skirt","phonetic":"x-cớt","meaning":"chân váy","type":"n","level":"a1"},
+{"word":"jacket","phonetic":"giác-kịt","meaning":"áo khoác","type":"n","level":"a1"},
+{"word":"coat","phonetic":"cốt","meaning":"áo măng tô","type":"n","level":"a2"},
+{"word":"shoes","phonetic":"shu-z","meaning":"giày","type":"n","level":"a1"},
+{"word":"boots","phonetic":"bút-s","meaning":"bốt","type":"n","level":"a2"},
+{"word":"socks","phonetic":"sóc-s","meaning":"tất/vớ","type":"n","level":"a1"},
+{"word":"hat","phonetic":"hát","meaning":"mũ","type":"n","level":"a1"},
+{"word":"suit","phonetic":"sút","meaning":"bộ com lê","type":"n","level":"a2"},
+{"word":"uniform","phonetic":"iu-ni-phom","meaning":"đồng phục","type":"n","level":"a2"},
+{"word":"raincoat","phonetic":"rên-cốt","meaning":"áo mưa","type":"n","level":"a2"},
+{"word":"umbrella","phonetic":"ăm-b-ré-lờ","meaning":"cái ô","type":"n","level":"a1"},
+{"word":"gloves","phonetic":"g-lắp-v-z","meaning":"găng tay","type":"n","level":"a2"},
+{"word":"scarf","phonetic":"x-ca-ph","meaning":"khăn quàng cổ","type":"n","level":"a2"},
+{"word":"glasses","phonetic":"g-lát-s-sịt-z","meaning":"kính mắt","type":"n","level":"a2"},
+{"word":"tie","phonetic":"tai","meaning":"cà vạt","type":"n","level":"a2"},
+{"word":"pyjamas","phonetic":"pơ-gia-mờ-z","meaning":"đồ ngủ","type":"n","level":"a2"},
+{"word":"swimsuit","phonetic":"suím-sút","meaning":"đồ bơi","type":"n","level":"a2"},
+{"word":"clothes","phonetic":"c-lâu-z","meaning":"quần áo","type":"n","level":"a1"},
+{"word":"computer","phonetic":"cầm-piu-tờ","meaning":"máy tính","type":"n","level":"a1"},
+{"word":"laptop","phonetic":"láp-tóp","meaning":"máy tính xách tay","type":"n","level":"a1"},
+{"word":"smartphone","phonetic":"x-mát-phôn","meaning":"điện thoại thông minh","type":"n","level":"a1"},
+{"word":"tablet","phonetic":"táp-lịt","meaning":"máy tính bảng","type":"n","level":"a2"},
+{"word":"internet","phonetic":"in-tơ-nét","meaning":"mạng internet","type":"n","level":"a1"},
+{"word":"website","phonetic":"uép-sai-t","meaning":"trang web","type":"n","level":"a2"},
+{"word":"app","phonetic":"áp","meaning":"ứng dụng","type":"n","level":"a1"},
+{"word":"social media","phonetic":"sâu-shồ mi-đi-ờ","meaning":"mạng xã hội","type":"n","level":"a2"},
+{"word":"email","phonetic":"i-mêu","meaning":"thư điện tử","type":"n","level":"a1"},
+{"word":"password","phonetic":"pát-s-uốt","meaning":"mật khẩu","type":"n","level":"a2"},
+{"word":"download","phonetic":"đao-lốt","meaning":"tải về","type":"v","level":"a2"},
+{"word":"upload","phonetic":"ấp-lốt","meaning":"tải lên","type":"v","level":"a2"},
+{"word":"search","phonetic":"sớt-ch","meaning":"tìm kiếm","type":"v","level":"a1"},
+{"word":"click","phonetic":"c-lích","meaning":"nhấp chuột","type":"v","level":"a2"},
+{"word":"screen","phonetic":"x-c-rin","meaning":"màn hình","type":"n","level":"a1"},
+{"word":"keyboard","phonetic":"ki-bo-đ","meaning":"bàn phím","type":"n","level":"a2"},
+{"word":"camera","phonetic":"ca-me-rờ","meaning":"máy ảnh","type":"n","level":"a1"},
+{"word":"printer","phonetic":"p-rin-tờ","meaning":"máy in","type":"n","level":"a2"},
+{"word":"charger","phonetic":"cha-giờ","meaning":"bộ sạc","type":"n","level":"a2"},
+{"word":"battery","phonetic":"bát-tơ-ri","meaning":"pin","type":"n","level":"a2"},
+{"word":"wifi","phonetic":"uai-phai","meaning":"wifi","type":"n","level":"a1"},
+{"word":"message","phonetic":"mé-xị-gi","meaning":"tin nhắn","type":"n","level":"a1"},
+{"word":"video call","phonetic":"vi-đi-âu con","meaning":"gọi video","type":"n","level":"a2"},
+{"word":"online","phonetic":"on-lain","meaning":"trực tuyến","type":"adj","level":"a1"},
+{"word":"offline","phonetic":"op-lain","meaning":"ngoại tuyến","type":"adj","level":"a2"},
+{"word":"mountain","phonetic":"mao-tần","meaning":"núi","type":"n","level":"a1"},
+{"word":"river","phonetic":"ri-vờ","meaning":"sông","type":"n","level":"a1"},
+{"word":"lake","phonetic":"lếch","meaning":"hồ","type":"n","level":"a1"},
+{"word":"sea","phonetic":"xi","meaning":"biển","type":"n","level":"a1"},
+{"word":"beach","phonetic":"bít-ch","meaning":"bãi biển","type":"n","level":"a1"},
+{"word":"forest","phonetic":"pho-rít-s-t","meaning":"rừng","type":"n","level":"a1"},
+{"word":"desert","phonetic":"đe-zợt","meaning":"sa mạc","type":"n","level":"a2"},
+{"word":"island","phonetic":"ai-lần-đ","meaning":"đảo","type":"n","level":"a2"},
+{"word":"waterfall","phonetic":"uo-tơ-phôn","meaning":"thác nước","type":"n","level":"a2"},
+{"word":"field","phonetic":"phiu-đ","meaning":"cánh đồng","type":"n","level":"a2"},
+{"word":"sky","phonetic":"x-cai","meaning":"bầu trời","type":"n","level":"a1"},
+{"word":"sun","phonetic":"săn","meaning":"mặt trời","type":"n","level":"a1"},
+{"word":"moon","phonetic":"mun","meaning":"mặt trăng","type":"n","level":"a1"},
+{"word":"star","phonetic":"x-ta","meaning":"ngôi sao","type":"n","level":"a1"},
+{"word":"cloud","phonetic":"c-lao-đ","meaning":"đám mây","type":"n","level":"a1"},
+{"word":"wind","phonetic":"uín-đ","meaning":"gió","type":"n","level":"a1"},
+{"word":"rain","phonetic":"rên","meaning":"mưa","type":"n","level":"a1"},
+{"word":"snow","phonetic":"x-nâu","meaning":"tuyết","type":"n","level":"a1"},
+{"word":"storm","phonetic":"x-tom","meaning":"bão","type":"n","level":"a2"},
+{"word":"flood","phonetic":"ph-lắt","meaning":"lũ lụt","type":"n","level":"a2"},
+{"word":"earthquake","phonetic":"ơ-th-quêch","meaning":"động đất","type":"n","level":"a2"},
+{"word":"sunny","phonetic":"săn-ni","meaning":"nắng","type":"adj","level":"a1"},
+{"word":"cloudy","phonetic":"c-lao-đi","meaning":"có mây","type":"adj","level":"a1"},
+{"word":"rainy","phonetic":"rê-ni","meaning":"mưa","type":"adj","level":"a1"},
+{"word":"windy","phonetic":"uín-đi","meaning":"có gió","type":"adj","level":"a1"},
+{"word":"foggy","phonetic":"phóc-ghi","meaning":"có sương mù","type":"adj","level":"a2"},
+{"word":"hot","phonetic":"hót","meaning":"nóng","type":"adj","level":"a1"},
+{"word":"warm","phonetic":"uôm","meaning":"ấm","type":"adj","level":"a1"},
+{"word":"cool","phonetic":"cun","meaning":"mát","type":"adj","level":"a1"},
+{"word":"chilly","phonetic":"chi-li","meaning":"lạnh cóng","type":"adj","level":"a2"},
+{"word":"temperature","phonetic":"tem-p-rơ-chờ","meaning":"nhiệt độ","type":"n","level":"a2"},
+{"word":"pollution","phonetic":"pơ-lu-shần","meaning":"ô nhiễm","type":"n","level":"a2"},
+{"word":"recycle","phonetic":"ri-sai-cồ","meaning":"tái chế","type":"v","level":"a2"},
+{"word":"waste","phonetic":"uết-s-t","meaning":"rác thải","type":"n","level":"a2"},
+{"word":"energy","phonetic":"e-nơ-gi","meaning":"năng lượng","type":"n","level":"a2"},
+{"word":"climate change","phonetic":"c-lai-mịt chên-gi","meaning":"biến đổi khí hậu","type":"n","level":"a2"},
+{"word":"protect","phonetic":"p-rô-tếch-t","meaning":"bảo vệ","type":"v","level":"a2"},
+{"word":"natural","phonetic":"na-chơ-rồ","meaning":"tự nhiên","type":"adj","level":"a2"},
+{"word":"environment","phonetic":"in-vai-rần-mần-t","meaning":"môi trường","type":"n","level":"a2"},
+{"word":"nature","phonetic":"nây-chờ","meaning":"thiên nhiên","type":"n","level":"a2"},
+{"word":"plant","phonetic":"p-lan-t","meaning":"cây/thực vật","type":"n","level":"a1"},
+{"word":"tree","phonetic":"t-ri","meaning":"cây cối","type":"n","level":"a1"},
+{"word":"flower","phonetic":"ph-lao-ờ","meaning":"hoa","type":"n","level":"a1"},
+{"word":"grass","phonetic":"g-rát-s","meaning":"cỏ","type":"n","level":"a1"},
+{"word":"animal","phonetic":"a-ni-mồ","meaning":"động vật","type":"n","level":"a1"},
+{"word":"dog","phonetic":"đóc-g","meaning":"chó","type":"n","level":"a1"},
+{"word":"cat","phonetic":"cát","meaning":"mèo","type":"n","level":"a1"},
+{"word":"bird","phonetic":"bớt","meaning":"chim","type":"n","level":"a1"},
+{"word":"horse","phonetic":"hót-s","meaning":"ngựa","type":"n","level":"a1"},
+{"word":"cow","phonetic":"cao","meaning":"bò","type":"n","level":"a1"},
+{"word":"pig","phonetic":"pig","meaning":"lợn","type":"n","level":"a1"},
+{"word":"elephant","phonetic":"e-li-phần-t","meaning":"voi","type":"n","level":"a1"},
+{"word":"lion","phonetic":"lai-ần","meaning":"sư tử","type":"n","level":"a1"},
+{"word":"tiger","phonetic":"tai-gờ","meaning":"hổ","type":"n","level":"a1"},
+{"word":"monkey","phonetic":"măng-ki","meaning":"khỉ","type":"n","level":"a1"},
+{"word":"snake","phonetic":"x-nêch","meaning":"rắn","type":"n","level":"a2"},
+{"word":"insect","phonetic":"in-xếch-t","meaning":"côn trùng","type":"n","level":"a2"},
+{"word":"classroom","phonetic":"c-lát-s-rum","meaning":"lớp học","type":"n","level":"a1"},
+{"word":"student","phonetic":"x-tiu-đần-t","meaning":"học sinh","type":"n","level":"a1"},
+{"word":"lesson","phonetic":"lé-sần","meaning":"bài học","type":"n","level":"a1"},
+{"word":"homework","phonetic":"hôm-uốc","meaning":"bài tập về nhà","type":"n","level":"a1"},
+{"word":"exam","phonetic":"íc-giăm","meaning":"kỳ thi","type":"n","level":"a2"},
+{"word":"grade","phonetic":"g-rết","meaning":"điểm số","type":"n","level":"a2"},
+{"word":"subject","phonetic":"sắp-giếch-t","meaning":"môn học","type":"n","level":"a1"},
+{"word":"Maths","phonetic":"mát-th-s","meaning":"Toán","type":"n","level":"a1"},
+{"word":"Science","phonetic":"sai-ơn-s","meaning":"Khoa học","type":"n","level":"a1"},
+{"word":"History","phonetic":"hít-x-tơ-ri","meaning":"Lịch sử","type":"n","level":"a1"},
+{"word":"Geography","phonetic":"gi-o-g-rơ-phi","meaning":"Địa lý","type":"n","level":"a2"},
+{"word":"Art","phonetic":"át","meaning":"Nghệ thuật","type":"n","level":"a1"},
+{"word":"Music","phonetic":"miu-zíc","meaning":"Âm nhạc","type":"n","level":"a1"},
+{"word":"PE","phonetic":"pi-i","meaning":"Thể dục","type":"n","level":"a1"},
+{"word":"university","phonetic":"iu-ni-vơ-xi-ti","meaning":"đại học","type":"n","level":"a2"},
+{"word":"degree","phonetic":"đi-g-ri","meaning":"bằng cấp","type":"n","level":"a2"},
+{"word":"scholarship","phonetic":"x-co-lơ-shíp","meaning":"học bổng","type":"n","level":"a2"},
+{"word":"dictionary","phonetic":"đíc-shần-nơ-ri","meaning":"từ điển","type":"n","level":"a1"},
+{"word":"primary school","phonetic":"p-rai-mơ-ri x-cun","meaning":"trường tiểu học","type":"n","level":"a2"},
+{"word":"secondary school","phonetic":"xé-cần-đ-ri x-cun","meaning":"trường trung học","type":"n","level":"a2"},
+{"word":"knowledge","phonetic":"nó-lị-gi","meaning":"kiến thức","type":"n","level":"a2"},
+{"word":"experience","phonetic":"íc-x-pi-ri-ơn-s","meaning":"kinh nghiệm","type":"n","level":"a2"},
+{"word":"class","phonetic":"c-lát-s","meaning":"lớp học","type":"n","level":"a1"},
+{"word":"lesson plan","phonetic":"lé-sần p-lan","meaning":"kế hoạch bài học","type":"n","level":"a2"},
+{"word":"timetable","phonetic":"tham-tây-bồ","meaning":"thời khoá biểu","type":"n","level":"a2"},
+{"word":"essay","phonetic":"e-xây","meaning":"bài luận","type":"n","level":"a2"},
+{"word":"project","phonetic":"p-ró-giếch-t","meaning":"dự án","type":"n","level":"a2"},
+{"word":"report","phonetic":"ri-pót","meaning":"báo cáo","type":"n","level":"a2"},
+{"word":"presentation","phonetic":"p-re-zần-tây-shần","meaning":"bài thuyết trình","type":"n","level":"a2"},
+{"word":"calculator","phonetic":"cán-kiu-lây-tờ","meaning":"máy tính bỏ túi","type":"n","level":"a2"},
+{"word":"notebook","phonetic":"nôt-búc","meaning":"vở ghi","type":"n","level":"a1"},
+{"word":"pen","phonetic":"pen","meaning":"bút bi","type":"n","level":"a1"},
+{"word":"pencil","phonetic":"pen-xồ","meaning":"bút chì","type":"n","level":"a1"},
+{"word":"ruler","phonetic":"ru-lờ","meaning":"thước kẻ","type":"n","level":"a1"},
+{"word":"eraser","phonetic":"i-rây-zờ","meaning":"tẩy","type":"n","level":"a1"},
+{"word":"backpack","phonetic":"bác-pák","meaning":"ba lô","type":"n","level":"a1"},
+{"word":"How are you?","phonetic":"Hao a iu","meaning":"Bạn có khoẻ không?","type":"phrase","level":"a1"},
+{"word":"Nice to meet you.","phonetic":"Nai-s tu mít iu","meaning":"Rất vui được gặp bạn.","type":"phrase","level":"a1"},
+{"word":"See you later.","phonetic":"Xi iu lây-tờ","meaning":"Hẹn gặp lại.","type":"phrase","level":"a1"},
+{"word":"Take care.","phonetic":"Tếch ke","meaning":"Giữ gìn sức khoẻ.","type":"phrase","level":"a1"},
+{"word":"I agree.","phonetic":"Ai ơ-g-ri","meaning":"Tôi đồng ý.","type":"phrase","level":"a2"},
+{"word":"I don't agree.","phonetic":"Ai đôn-t ơ-g-ri","meaning":"Tôi không đồng ý.","type":"phrase","level":"a2"},
+{"word":"That's right.","phonetic":"Đát-s rai-t","meaning":"Đúng vậy.","type":"phrase","level":"a2"},
+{"word":"I'm not sure.","phonetic":"Am nót shua","meaning":"Tôi không chắc.","type":"phrase","level":"a2"},
+{"word":"Can you help me?","phonetic":"Can iu hép mi","meaning":"Bạn có thể giúp tôi không?","type":"phrase","level":"a1"},
+{"word":"Of course!","phonetic":"Ợp co-s","meaning":"Tất nhiên!","type":"phrase","level":"a1"},
+{"word":"No problem.","phonetic":"Nâu p-róp-lầm","meaning":"Không vấn đề gì.","type":"phrase","level":"a1"},
+{"word":"What do you mean?","phonetic":"Oát đu iu min","meaning":"Bạn có nghĩa là gì?","type":"phrase","level":"a2"},
+{"word":"Could you repeat that?","phonetic":"Cút iu ri-pít đát","meaning":"Bạn có thể nói lại không?","type":"phrase","level":"a2"},
+{"word":"I think...","phonetic":"Ai thinh-c","meaning":"Tôi nghĩ...","type":"phrase","level":"a2"},
+{"word":"In my opinion...","phonetic":"In mai ơ-pi-ni-ần","meaning":"Theo ý kiến của tôi...","type":"phrase","level":"a2"},
+{"word":"I prefer...","phonetic":"Ai p-ri-phơ","meaning":"Tôi thích... hơn","type":"phrase","level":"a2"},
+{"word":"I'd like to...","phonetic":"Ai-đ lai-c tu","meaning":"Tôi muốn...","type":"phrase","level":"a2"},
+{"word":"Excuse me.","phonetic":"ít-x-kiu-z mi","meaning":"Xin lỗi (để hỏi).","type":"phrase","level":"a1"},
+{"word":"Sorry.","phonetic":"xo-ri","meaning":"Xin lỗi.","type":"phrase","level":"a1"},
+{"word":"Thank you.","phonetic":"thăn-k iu","meaning":"Cảm ơn.","type":"phrase","level":"a1"},
+{"word":"You're welcome.","phonetic":"iu-ờ uel-cầm","meaning":"Không có gì.","type":"phrase","level":"a1"},
+{"word":"Good morning.","phonetic":"gút mo-ninh","meaning":"Chào buổi sáng.","type":"phrase","level":"a1"},
+{"word":"Good night.","phonetic":"gút nai-t","meaning":"Chúc ngủ ngon.","type":"phrase","level":"a1"},
+{"word":"Happy birthday!","phonetic":"háp-pi bớt-th-đây","meaning":"Chúc mừng sinh nhật!","type":"phrase","level":"a1"},
+{"word":"Congratulations!","phonetic":"cơn-g-rát-iu-lây-shần-z","meaning":"Chúc mừng!","type":"phrase","level":"a2"},
+{"word":"Good luck!","phonetic":"gút lắc","meaning":"Chúc may mắn!","type":"phrase","level":"a1"},
+{"word":"different","phonetic":"đíp-ph-rần-t","meaning":"khác nhau","type":"adj","level":"a1"},
+{"word":"nice","phonetic":"nai-s","meaning":"tốt/đẹp","type":"adj","level":"a1"},
+{"word":"good","phonetic":"gút","meaning":"tốt","type":"adj","level":"a1"},
+{"word":"bad","phonetic":"bát","meaning":"tệ/xấu","type":"adj","level":"a1"},
+{"word":"great","phonetic":"g-rết","meaning":"tuyệt vời","type":"adj","level":"a1"},
+{"word":"happy","phonetic":"háp-pi","meaning":"vui vẻ","type":"adj","level":"a1"},
+{"word":"sad","phonetic":"xát","meaning":"buồn","type":"adj","level":"a1"},
+{"word":"angry","phonetic":"ang-g-ri","meaning":"tức giận","type":"adj","level":"a1"},
+{"word":"excited","phonetic":"ít-x-sai-tịt","meaning":"hào hứng","type":"adj","level":"a2"},
+{"word":"bored","phonetic":"bo-đ","meaning":"chán","type":"adj","level":"a2"},
+{"word":"surprised","phonetic":"sơ-p-rai-z-đ","meaning":"ngạc nhiên","type":"adj","level":"a2"},
+{"word":"worried","phonetic":"uo-ri-đ","meaning":"lo lắng","type":"adj","level":"a2"},
+{"word":"scared","phonetic":"x-ke-đ","meaning":"sợ hãi","type":"adj","level":"a2"},
+{"word":"easy","phonetic":"i-zi","meaning":"dễ dàng","type":"adj","level":"a1"},
+{"word":"difficult","phonetic":"đíp-phị-căn-t","meaning":"khó","type":"adj","level":"a1"},
+{"word":"beautiful","phonetic":"biu-ti-phun","meaning":"đẹp","type":"adj","level":"a1"},
+{"word":"ugly","phonetic":"ắc-g-li","meaning":"xấu","type":"adj","level":"a2"},
+{"word":"big","phonetic":"bíc-g","meaning":"to/lớn","type":"adj","level":"a1"},
+{"word":"small","phonetic":"x-mon","meaning":"nhỏ","type":"adj","level":"a1"},
+{"word":"tall","phonetic":"ton","meaning":"cao","type":"adj","level":"a1"},
+{"word":"short","phonetic":"shot","meaning":"thấp/ngắn","type":"adj","level":"a1"},
+{"word":"long","phonetic":"lóng","meaning":"dài","type":"adj","level":"a1"},
+{"word":"wide","phonetic":"uai-đ","meaning":"rộng","type":"adj","level":"a2"},
+{"word":"narrow","phonetic":"na-rô","meaning":"hẹp","type":"adj","level":"a2"},
+{"word":"heavy","phonetic":"he-vi","meaning":"nặng","type":"adj","level":"a1"},
+{"word":"light","phonetic":"lai-t","meaning":"nhẹ","type":"adj","level":"a1"},
+{"word":"new","phonetic":"niu","meaning":"mới","type":"adj","level":"a1"},
+{"word":"old","phonetic":"âu-đ","meaning":"cũ/già","type":"adj","level":"a1"},
+{"word":"young","phonetic":"yang","meaning":"trẻ","type":"adj","level":"a1"},
+{"word":"fast","phonetic":"phát-s-t","meaning":"nhanh","type":"adj","level":"a1"},
+{"word":"slow","phonetic":"x-lâu","meaning":"chậm","type":"adj","level":"a1"},
+{"word":"loud","phonetic":"lao-đ","meaning":"ồn ào","type":"adj","level":"a2"},
+{"word":"clean","phonetic":"c-lin","meaning":"sạch sẽ","type":"adj","level":"a1"},
+{"word":"dirty","phonetic":"đơ-ti","meaning":"bẩn","type":"adj","level":"a1"},
+{"word":"careful","phonetic":"ke-phun","meaning":"cẩn thận","type":"adj","level":"a2"},
+{"word":"careless","phonetic":"ke-lịt-s","meaning":"bất cẩn","type":"adj","level":"a2"},
+{"word":"suitable","phonetic":"su-tơ-bồ","meaning":"phù hợp","type":"adj","level":"a2"},
+{"word":"active","phonetic":"ác-típ-v","meaning":"năng động","type":"adj","level":"a2"},
+{"word":"hungry","phonetic":"hăng-g-ri","meaning":"đói","type":"adj","level":"a1"},
+{"word":"thirsty","phonetic":"thớt-s-ti","meaning":"khát","type":"adj","level":"a1"},
+{"word":"full","phonetic":"phun","meaning":"no","type":"adj","level":"a1"},
+{"word":"perfect","phonetic":"pơ-phếch-t","meaning":"hoàn hảo","type":"adj","level":"a2"},
+{"word":"fresh","phonetic":"ph-rét-sh","meaning":"tươi/mới","type":"adj","level":"a2"},
+{"word":"cute","phonetic":"kiu-t","meaning":"đáng yêu","type":"adj","level":"a1"},
+{"word":"free","phonetic":"ph-ri","meaning":"rảnh rỗi/miễn phí","type":"adj","level":"a1"},
+{"word":"famous","phonetic":"phây-mợt-s","meaning":"nổi tiếng","type":"adj","level":"a2"},
+{"word":"popular","phonetic":"póp-iu-lờ","meaning":"phổ biến","type":"adj","level":"a2"},
+{"word":"interesting","phonetic":"in-t-rịt-s-tinh","meaning":"thú vị","type":"adj","level":"a1"},
+{"word":"boring","phonetic":"bo-rinh","meaning":"nhàm chán","type":"adj","level":"a2"},
+{"word":"dangerous","phonetic":"đên-gi-rợt-s","meaning":"nguy hiểm","type":"adj","level":"a2"},
+{"word":"safe","phonetic":"xêp-ph","meaning":"an toàn","type":"adj","level":"a2"},
+{"word":"important","phonetic":"im-po-tần-t","meaning":"quan trọng","type":"adj","level":"a2"},
+{"word":"lucky","phonetic":"lắc-ki","meaning":"may mắn","type":"adj","level":"a2"},
+{"word":"strange","phonetic":"x-t-rên-gi","meaning":"lạ","type":"adj","level":"a2"},
+{"word":"sure","phonetic":"shu-ờ","meaning":"chắc chắn","type":"adj","level":"a2"},
+{"word":"ready","phonetic":"ré-đi","meaning":"sẵn sàng","type":"adj","level":"a2"},
+{"word":"right","phonetic":"rai-t","meaning":"đúng","type":"adj","level":"a1"},
+{"word":"wrong","phonetic":"rong","meaning":"sai","type":"adj","level":"a1"},
+{"word":"very","phonetic":"ve-ri","meaning":"rất","type":"adv","level":"a1"},
+{"word":"quite","phonetic":"quai-t","meaning":"khá","type":"adv","level":"a2"},
+{"word":"too","phonetic":"tu","meaning":"quá","type":"adv","level":"a1"},
+{"word":"also","phonetic":"ôn-sâu","meaning":"cũng","type":"adv","level":"a1"},
+{"word":"together","phonetic":"tơ-ghe-đờ","meaning":"cùng nhau","type":"adv","level":"a1"},
+{"word":"firstly","phonetic":"phớt-s-li","meaning":"đầu tiên","type":"adv","level":"a2"},
+{"word":"secondly","phonetic":"xé-cần-li","meaning":"thứ hai","type":"adv","level":"a2"},
+{"word":"finally","phonetic":"phai-nơ-li","meaning":"cuối cùng","type":"adv","level":"a2"},
+{"word":"quickly","phonetic":"quíc-li","meaning":"nhanh chóng","type":"adv","level":"a2"},
+{"word":"carefully","phonetic":"ke-phu-li","meaning":"một cách cẩn thận","type":"adv","level":"a2"},
+{"word":"slowly","phonetic":"x-lâu-li","meaning":"một cách chậm rãi","type":"adv","level":"a2"},
+{"word":"well","phonetic":"ueo","meaning":"tốt/giỏi","type":"adv","level":"a1"},
+{"word":"hard","phonetic":"hát-đ","meaning":"chăm chỉ","type":"adv","level":"a1"},
+{"word":"abroad","phonetic":"ơ-b-rót-đ","meaning":"ở nước ngoài","type":"adv","level":"a2"},
+{"word":"already","phonetic":"on-ré-đi","meaning":"đã rồi","type":"adv","level":"a2"},
+{"word":"still","phonetic":"x-til","meaning":"vẫn còn","type":"adv","level":"a2"},
+{"word":"yet","phonetic":"yét","meaning":"chưa/rồi","type":"adv","level":"a2"},
+{"word":"just","phonetic":"giắt-s-t","meaning":"vừa/chỉ","type":"adv","level":"a2"},
+{"word":"really","phonetic":"ri-ơ-li","meaning":"thật sự","type":"adv","level":"a1"},
+{"word":"maybe","phonetic":"mây-bi","meaning":"có thể","type":"adv","level":"a1"},
+{"word":"perhaps","phonetic":"pơ-háp-s","meaning":"có lẽ","type":"adv","level":"a2"},
+{"word":"again","phonetic":"ơ-ghen","meaning":"lại","type":"adv","level":"a1"},
+{"word":"enough","phonetic":"i-nắp","meaning":"đủ","type":"adv","level":"a2"},
+{"word":"almost","phonetic":"on-mâu-s-t","meaning":"gần như","type":"adv","level":"a2"},
+{"word":"next to","phonetic":"néc-x-t tu","meaning":"bên cạnh","type":"prep","level":"a1"},
+{"word":"opposite","phonetic":"óp-pơ-zịt","meaning":"đối diện","type":"prep","level":"a2"},
+{"word":"in front of","phonetic":"in ph-răn ợp","meaning":"đằng trước","type":"prep","level":"a1"},
+{"word":"behind","phonetic":"bi-hai-đ","meaning":"đằng sau","type":"prep","level":"a1"},
+{"word":"between","phonetic":"bi-t-uín","meaning":"ở giữa (hai thứ)","type":"prep","level":"a2"},
+{"word":"among","phonetic":"ơ-mắng","meaning":"ở giữa (nhiều thứ)","type":"prep","level":"a2"},
+{"word":"above","phonetic":"ơ-bắp-v","meaning":"phía trên","type":"prep","level":"a2"},
+{"word":"below","phonetic":"bi-lâu","meaning":"phía dưới","type":"prep","level":"a2"},
+{"word":"inside","phonetic":"in-sai-đ","meaning":"bên trong","type":"prep","level":"a1"},
+{"word":"outside","phonetic":"ao-t-sai-đ","meaning":"bên ngoài","type":"prep","level":"a1"},
+{"word":"near","phonetic":"ni-ờ","meaning":"gần","type":"prep","level":"a1"},
+{"word":"far from","phonetic":"pha ph-răm","meaning":"xa","type":"prep","level":"a1"},
+{"word":"along","phonetic":"ơ-lóng","meaning":"dọc theo","type":"prep","level":"a2"},
+{"word":"through","phonetic":"th-ru","meaning":"qua/xuyên qua","type":"prep","level":"a2"},
+{"word":"across","phonetic":"ơ-c-rót-s","meaning":"băng qua","type":"prep","level":"a2"},
+{"word":"be","phonetic":"bi","meaning":"là/thì/ở","type":"v","level":"a1"},
+{"word":"have","phonetic":"hép-v","meaning":"có","type":"v","level":"a1"},
+{"word":"do","phonetic":"đu","meaning":"làm","type":"v","level":"a1"},
+{"word":"go","phonetic":"gâu","meaning":"đi","type":"v","level":"a1"},
+{"word":"come","phonetic":"căm","meaning":"đến","type":"v","level":"a1"},
+{"word":"get","phonetic":"ghét","meaning":"có được/đến","type":"v","level":"a1"},
+{"word":"make","phonetic":"mêch","meaning":"làm/tạo ra","type":"v","level":"a1"},
+{"word":"know","phonetic":"nâu","meaning":"biết","type":"v","level":"a1"},
+{"word":"think","phonetic":"thinh-c","meaning":"nghĩ","type":"v","level":"a1"},
+{"word":"take","phonetic":"tếch","meaning":"cầm/mang","type":"v","level":"a1"},
+{"word":"see","phonetic":"xi","meaning":"nhìn/gặp","type":"v","level":"a1"},
+{"word":"look","phonetic":"lúc","meaning":"nhìn/trông","type":"v","level":"a1"},
+{"word":"want","phonetic":"uon-t","meaning":"muốn","type":"v","level":"a1"},
+{"word":"give","phonetic":"ghíp-v","meaning":"đưa cho","type":"v","level":"a1"},
+{"word":"use","phonetic":"iu-z","meaning":"sử dụng","type":"v","level":"a1"},
+{"word":"find","phonetic":"phai-đ","meaning":"tìm thấy","type":"v","level":"a1"},
+{"word":"tell","phonetic":"teo","meaning":"kể/bảo","type":"v","level":"a1"},
+{"word":"ask","phonetic":"át-s-k","meaning":"hỏi","type":"v","level":"a1"},
+{"word":"say","phonetic":"xây","meaning":"nói","type":"v","level":"a1"},
+{"word":"talk","phonetic":"tóc-c","meaning":"nói chuyện","type":"v","level":"a1"},
+{"word":"work","phonetic":"uốc","meaning":"làm việc","type":"v","level":"a1"},
+{"word":"live","phonetic":"li-v","meaning":"sống","type":"v","level":"a1"},
+{"word":"play","phonetic":"p-lây","meaning":"chơi","type":"v","level":"a1"},
+{"word":"run","phonetic":"răn","meaning":"chạy","type":"v","level":"a1"},
+{"word":"move","phonetic":"muv","meaning":"di chuyển","type":"v","level":"a1"},
+{"word":"pay","phonetic":"pây","meaning":"trả tiền","type":"v","level":"a1"},
+{"word":"send","phonetic":"xen-đ","meaning":"gửi","type":"v","level":"a1"},
+{"word":"meet","phonetic":"mít","meaning":"gặp gỡ","type":"v","level":"a1"},
+{"word":"feel","phonetic":"phiu","meaning":"cảm thấy","type":"v","level":"a1"},
+{"word":"hear","phonetic":"hi-ờ","meaning":"nghe","type":"v","level":"a1"},
+{"word":"keep","phonetic":"kíp","meaning":"giữ","type":"v","level":"a1"},
+{"word":"hold","phonetic":"hâu-đ","meaning":"cầm/nắm","type":"v","level":"a1"},
+{"word":"leave","phonetic":"li-v","meaning":"rời đi","type":"v","level":"a1"},
+{"word":"bring","phonetic":"b-rinh","meaning":"mang theo","type":"v","level":"a1"},
+{"word":"begin","phonetic":"bi-ghin","meaning":"bắt đầu","type":"v","level":"a1"},
+{"word":"start","phonetic":"x-tát","meaning":"bắt đầu","type":"v","level":"a1"},
+{"word":"stop","phonetic":"x-tóp","meaning":"dừng lại","type":"v","level":"a1"},
+{"word":"break","phonetic":"b-rếch","meaning":"làm vỡ","type":"v","level":"a1"},
+{"word":"cut","phonetic":"cắt","meaning":"cắt","type":"v","level":"a1"},
+{"word":"fall","phonetic":"phôn","meaning":"rơi/ngã","type":"v","level":"a1"},
+{"word":"stand","phonetic":"x-tan-đ","meaning":"đứng","type":"v","level":"a1"},
+{"word":"wait","phonetic":"uết","meaning":"đợi","type":"v","level":"a1"},
+{"word":"follow","phonetic":"pho-lâu","meaning":"đi theo","type":"v","level":"a2"},
+{"word":"arrive","phonetic":"ơ-rai-v","meaning":"đến (nơi nào đó)","type":"v","level":"a2"},
+{"word":"return","phonetic":"ri-tơn","meaning":"quay trở lại","type":"v","level":"a2"},
+{"word":"remember","phonetic":"ri-mem-bờ","meaning":"nhớ","type":"v","level":"a2"},
+{"word":"forget","phonetic":"phờ-ghét","meaning":"quên","type":"v","level":"a2"},
+{"word":"understand","phonetic":"ăn-đờ-x-tan-đ","meaning":"hiểu","type":"v","level":"a2"},
+{"word":"learn","phonetic":"lơn","meaning":"học","type":"v","level":"a1"},
+{"word":"teach","phonetic":"tít-ch","meaning":"dạy","type":"v","level":"a1"},
+{"word":"help","phonetic":"hep","meaning":"giúp đỡ","type":"v","level":"a1"},
+{"word":"try","phonetic":"t-rai","meaning":"cố gắng/thử","type":"v","level":"a1"},
+{"word":"need","phonetic":"nít","meaning":"cần","type":"v","level":"a1"},
+{"word":"like","phonetic":"lai-k","meaning":"thích","type":"v","level":"a1"},
+{"word":"love","phonetic":"lắp-v","meaning":"yêu","type":"v","level":"a1"},
+{"word":"hate","phonetic":"hết-t","meaning":"ghét","type":"v","level":"a2"},
+{"word":"prefer","phonetic":"p-ri-phơ","meaning":"thích hơn","type":"v","level":"a2"},
+{"word":"enjoy","phonetic":"en-gioi","meaning":"thích/tận hưởng","type":"v","level":"a2"},
+{"word":"hope","phonetic":"hâu-p","meaning":"hy vọng","type":"v","level":"a2"},
+{"word":"believe","phonetic":"bi-liv","meaning":"tin tưởng","type":"v","level":"a2"},
+{"word":"decide","phonetic":"đi-xai-đ","meaning":"quyết định","type":"v","level":"a2"},
+{"word":"choose","phonetic":"chu-z","meaning":"chọn","type":"v","level":"a2"},
+{"word":"plan","phonetic":"p-lan","meaning":"lên kế hoạch","type":"v","level":"a2"},
+{"word":"prepare","phonetic":"p-ri-pe","meaning":"chuẩn bị","type":"v","level":"a2"},
+{"word":"carry","phonetic":"ca-ri","meaning":"mang/vác","type":"v","level":"a2"},
+{"word":"turn on","phonetic":"tơn on","meaning":"bật lên","type":"phrase","level":"a2"},
+{"word":"turn off","phonetic":"tơn op-ph","meaning":"tắt đi","type":"phrase","level":"a2"},
+{"word":"chat","phonetic":"chát","meaning":"tán gẫu","type":"v","level":"a2"},
+{"word":"fix","phonetic":"phíc-s","meaning":"sửa chữa","type":"v","level":"a2"},
+{"word":"repair","phonetic":"ri-pe","meaning":"sửa chữa","type":"v","level":"a2"},
+{"word":"check","phonetic":"chéc","meaning":"kiểm tra","type":"v","level":"a2"},
+{"word":"lend","phonetic":"len-đ","meaning":"cho mượn","type":"v","level":"a2"},
+{"word":"borrow","phonetic":"bo-rô","meaning":"mượn","type":"v","level":"a2"},
+{"word":"miss","phonetic":"mít-s","meaning":"bỏ lỡ/nhớ","type":"v","level":"a2"},
+{"word":"fail","phonetic":"phêu","meaning":"thất bại/trượt","type":"v","level":"a2"},
+{"word":"pass","phonetic":"pát-s","meaning":"vượt qua/thi đỗ","type":"v","level":"a2"},
+{"word":"graduate","phonetic":"g-ra-giu-ợt","meaning":"tốt nghiệp","type":"v","level":"a2"},
+{"word":"complete","phonetic":"cầm-p-lít","meaning":"hoàn thành","type":"v","level":"a2"},
+{"word":"join","phonetic":"gioi-n","meaning":"tham gia","type":"v","level":"a2"},
+{"word":"marry","phonetic":"ma-ri","meaning":"kết hôn","type":"v","level":"a2"},
+{"word":"smoke","phonetic":"x-mốc-c","meaning":"hút thuốc","type":"v","level":"a2"},
+{"word":"cry","phonetic":"c-rai","meaning":"khóc","type":"v","level":"a1"},
+{"word":"laugh","phonetic":"laf","meaning":"cười","type":"v","level":"a1"},
+{"word":"smile","phonetic":"x-mai-l","meaning":"mỉm cười","type":"v","level":"a1"},
+{"word":"swim","phonetic":"suím","meaning":"bơi","type":"v","level":"a1"},
+{"word":"fly","phonetic":"ph-lai","meaning":"bay","type":"v","level":"a1"},
+{"word":"drive","phonetic":"đ-rai-v","meaning":"lái xe","type":"v","level":"a2"},
+{"word":"walk","phonetic":"uoc-k","meaning":"đi bộ","type":"v","level":"a1"},
+{"word":"climb","phonetic":"c-laim","meaning":"leo trèo","type":"v","level":"a2"},
+{"word":"jump","phonetic":"giăm-p","meaning":"nhảy","type":"v","level":"a1"},
+{"word":"sit","phonetic":"xít","meaning":"ngồi","type":"v","level":"a1"},
+{"word":"sleep","phonetic":"x-líp","meaning":"ngủ","type":"v","level":"a1"},
+{"word":"eat","phonetic":"ít","meaning":"ăn","type":"v","level":"a1"},
+{"word":"drink","phonetic":"đ-rinh-c","meaning":"uống","type":"v","level":"a1"},
+{"word":"cook","phonetic":"cúc","meaning":"nấu ăn","type":"v","level":"a1"},
+{"word":"open","phonetic":"âu-pần","meaning":"mở","type":"v","level":"a1"},
+{"word":"close","phonetic":"c-lâu-z","meaning":"đóng lại","type":"v","level":"a1"},
+{"word":"read","phonetic":"rít","meaning":"đọc","type":"v","level":"a1"},
+{"word":"write","phonetic":"rai-t","meaning":"viết","type":"v","level":"a1"},
+{"word":"paint","phonetic":"pên-t","meaning":"sơn/vẽ tranh","type":"v","level":"a2"},
+{"word":"sing","phonetic":"xing","meaning":"hát","type":"v","level":"a1"},
+{"word":"dance","phonetic":"đan-s","meaning":"nhảy","type":"v","level":"a1"},
+{"word":"travel","phonetic":"t-ra-vồ","meaning":"du lịch","type":"v","level":"a1"},
+{"word":"visit","phonetic":"vi-zịt","meaning":"ghé thăm","type":"v","level":"a1"},
+{"word":"call","phonetic":"con","meaning":"gọi điện","type":"v","level":"a1"},
+{"word":"answer","phonetic":"an-sờ","meaning":"trả lời","type":"v","level":"a1"},
+{"word":"change","phonetic":"chên-gi","meaning":"thay đổi","type":"v","level":"a2"},
+{"word":"become","phonetic":"bi-căm","meaning":"trở nên/trở thành","type":"v","level":"a2"},
+{"word":"happen","phonetic":"háp-pần","meaning":"xảy ra","type":"v","level":"a2"},
+{"word":"show","phonetic":"shâu","meaning":"chỉ/trình bày","type":"v","level":"a2"},
+{"word":"explain","phonetic":"íc-x-p-lên","meaning":"giải thích","type":"v","level":"a2"},
+{"word":"describe","phonetic":"đít-s-c-rai-b","meaning":"mô tả","type":"v","level":"a2"},
+{"word":"invite","phonetic":"in-vai-t","meaning":"mời","type":"v","level":"a2"},
+{"word":"introduce","phonetic":"in-t-rơ-điu-s","meaning":"giới thiệu","type":"v","level":"a2"},
+{"word":"suggest","phonetic":"xơ-giét-s-t","meaning":"đề nghị/gợi ý","type":"v","level":"a2"},
+{"word":"agree","phonetic":"ơ-g-ri","meaning":"đồng ý","type":"v","level":"a2"},
+{"word":"disagree","phonetic":"đít-s-ơ-g-ri","meaning":"không đồng ý","type":"v","level":"a2"},
+{"word":"complain","phonetic":"cầm-p-lên","meaning":"phàn nàn","type":"v","level":"a2"},
+{"word":"apologise","phonetic":"ơ-po-lơ-giai-z","meaning":"xin lỗi","type":"v","level":"a2"},
+{"word":"celebrate","phonetic":"xé-lơ-b-rêt","meaning":"kỷ niệm/ăn mừng","type":"v","level":"a2"},
+{"word":"grow","phonetic":"g-rô","meaning":"trồng/phát triển","type":"v","level":"a2"},
+{"word":"rise","phonetic":"rai-z","meaning":"mọc/mọc lên","type":"v","level":"a2"},
+{"word":"type","phonetic":"tai-p","meaning":"gõ phím","type":"v","level":"a2"},
+{"word":"cost","phonetic":"cót-s-t","meaning":"có giá (bao nhiêu)","type":"v","level":"a1"},
+{"word":"receive","phonetic":"ri-xíp-v","meaning":"nhận được","type":"v","level":"a2"},
+{"word":"hundred","phonetic":"hăn-đ-rợt","meaning":"một trăm","type":"num","level":"a1"},
+{"word":"thousand","phonetic":"thao-zần","meaning":"một nghìn","type":"num","level":"a1"},
+{"word":"million","phonetic":"mi-li-ần","meaning":"một triệu","type":"num","level":"a2"},
+{"word":"half","phonetic":"haf","meaning":"một nửa","type":"num","level":"a1"},
+{"word":"quarter","phonetic":"quo-tờ","meaning":"một phần tư","type":"num","level":"a2"},
+{"word":"double","phonetic":"đắp-bồ","meaning":"gấp đôi","type":"adj","level":"a2"},
+{"word":"both","phonetic":"bâu-th","meaning":"cả hai","type":"adj","level":"a2"},
+{"word":"all","phonetic":"on","meaning":"tất cả","type":"adj","level":"a1"},
+{"word":"some","phonetic":"xăm","meaning":"một số","type":"adj","level":"a1"},
+{"word":"any","phonetic":"e-ni","meaning":"bất kỳ","type":"adj","level":"a1"},
+{"word":"few","phonetic":"phiu","meaning":"vài/ít","type":"adj","level":"a2"},
+{"word":"many","phonetic":"me-ni","meaning":"nhiều","type":"adj","level":"a1"},
+{"word":"much","phonetic":"mắt-ch","meaning":"nhiều (không đếm được)","type":"adj","level":"a1"},
+{"word":"several","phonetic":"xe-vơ-rồ","meaning":"vài (nhiều hơn hai)","type":"adj","level":"a2"},
+{"word":"and","phonetic":"an-đ","meaning":"và","type":"conj","level":"a1"},
+{"word":"but","phonetic":"bắt","meaning":"nhưng","type":"conj","level":"a1"},
+{"word":"or","phonetic":"o","meaning":"hoặc","type":"conj","level":"a1"},
+{"word":"because","phonetic":"bi-coz","meaning":"bởi vì","type":"conj","level":"a1"},
+{"word":"so","phonetic":"xâu","meaning":"vì vậy","type":"conj","level":"a1"},
+{"word":"although","phonetic":"on-đâu","meaning":"mặc dù","type":"conj","level":"a2"},
+{"word":"however","phonetic":"hao-é-vờ","meaning":"tuy nhiên","type":"conj","level":"a2"},
+{"word":"if","phonetic":"íp-ph","meaning":"nếu","type":"conj","level":"a1"},
+{"word":"when","phonetic":"uen","meaning":"khi","type":"conj","level":"a1"},
+{"word":"while","phonetic":"uai-l","meaning":"trong khi","type":"conj","level":"a2"},
+{"word":"before","phonetic":"bi-pho","meaning":"trước khi","type":"conj","level":"a1"},
+{"word":"after","phonetic":"áp-tờ","meaning":"sau khi","type":"conj","level":"a1"},
+{"word":"until","phonetic":"ăn-til","meaning":"cho đến khi","type":"conj","level":"a2"},
+{"word":"as soon as","phonetic":"az xun az","meaning":"ngay khi","type":"conj","level":"a2"},
+{"word":"unless","phonetic":"ăn-lét-s","meaning":"trừ khi","type":"conj","level":"a2"},
+{"word":"party","phonetic":"pa-ti","meaning":"bữa tiệc","type":"n","level":"a1"},
+{"word":"birthday","phonetic":"bớt-th-đây","meaning":"sinh nhật","type":"n","level":"a1"},
+{"word":"wedding","phonetic":"ué-đinh","meaning":"đám cưới","type":"n","level":"a2"},
+{"word":"holiday","phonetic":"ho-li-đây","meaning":"ngày lễ/kỳ nghỉ","type":"n","level":"a1"},
+{"word":"festival","phonetic":"phét-s-ti-vồ","meaning":"lễ hội","type":"n","level":"a2"},
+{"word":"event","phonetic":"i-vent","meaning":"sự kiện","type":"n","level":"a2"},
+{"word":"concert","phonetic":"con-xợt","meaning":"buổi hoà nhạc","type":"n","level":"a2"},
+{"word":"exhibition","phonetic":"éc-x-i-bi-shần","meaning":"triển lãm","type":"n","level":"a2"},
+{"word":"competition","phonetic":"com-pi-ti-shần","meaning":"cuộc thi","type":"n","level":"a2"},
+{"word":"contest","phonetic":"con-tét-s-t","meaning":"cuộc thi","type":"n","level":"a2"},
+{"word":"lottery","phonetic":"lót-tơ-ri","meaning":"xổ số","type":"n","level":"a2"},
+{"word":"accident","phonetic":"ác-xi-đần-t","meaning":"vụ tai nạn","type":"n","level":"a2"},
+{"word":"news","phonetic":"niu-z","meaning":"tin tức","type":"n","level":"a1"},
+{"word":"newspaper","phonetic":"niu-z-pây-pờ","meaning":"báo","type":"n","level":"a1"},
+{"word":"magazine","phonetic":"ma-gơ-zin","meaning":"tạp chí","type":"n","level":"a2"},
+{"word":"story","phonetic":"x-to-ri","meaning":"câu chuyện","type":"n","level":"a1"},
+{"word":"novel","phonetic":"no-vồ","meaning":"tiểu thuyết","type":"n","level":"a2"},
+{"word":"cartoon","phonetic":"ca-tun","meaning":"hoạt hình","type":"n","level":"a1"},
+{"word":"film","phonetic":"phim","meaning":"bộ phim","type":"n","level":"a1"},
+{"word":"movie","phonetic":"mu-vi","meaning":"bộ phim","type":"n","level":"a1"},
+{"word":"song","phonetic":"song","meaning":"bài hát","type":"n","level":"a1"},
+{"word":"sunflower","phonetic":"săn-ph-lao-ờ","meaning":"hoa hướng dương","type":"n","level":"a2"},
+{"word":"visitor","phonetic":"vi-zi-tờ","meaning":"du khách","type":"n","level":"a2"},
+{"word":"guest","phonetic":"ghét-s-t","meaning":"khách","type":"n","level":"a2"},
+{"word":"moment","phonetic":"mâu-mần-t","meaning":"khoảnh khắc","type":"n","level":"a2"},
+{"word":"happiness","phonetic":"háp-pi-nịt-s","meaning":"niềm vui","type":"n","level":"a2"},
+{"word":"problem","phonetic":"p-róp-lầm","meaning":"vấn đề","type":"n","level":"a1"},
+{"word":"solution","phonetic":"xơ-lu-shần","meaning":"giải pháp","type":"n","level":"a2"},
+{"word":"idea","phonetic":"ai-đi-ờ","meaning":"ý tưởng","type":"n","level":"a1"},
+{"word":"opinion","phonetic":"ơ-pi-ni-ần","meaning":"ý kiến","type":"n","level":"a2"},
+{"word":"question","phonetic":"quét-s-chần","meaning":"câu hỏi","type":"n","level":"a1"},
+{"word":"information","phonetic":"in-phờ-mây-shần","meaning":"thông tin","type":"n","level":"a2"},
+{"word":"world","phonetic":"uôn-đ","meaning":"thế giới","type":"n","level":"a1"},
+{"word":"language","phonetic":"lang-guít-sh","meaning":"ngôn ngữ","type":"n","level":"a2"},
+{"word":"culture","phonetic":"căl-chờ","meaning":"văn hoá","type":"n","level":"a2"},
+{"word":"tradition","phonetic":"t-rơ-đít-shần","meaning":"truyền thống","type":"n","level":"a2"},
+{"word":"English","phonetic":"inh-lít-sh","meaning":"tiếng Anh","type":"n","level":"a1"},
+{"word":"watch","phonetic":"oắt-ch","meaning":"đồng hồ đeo tay","type":"n","level":"a1"},
+{"word":"clock","phonetic":"c-lóc","meaning":"đồng hồ","type":"n","level":"a1"},
+{"word":"letter","phonetic":"lét-tờ","meaning":"lá thư","type":"n","level":"a2"},
+{"word":"East","phonetic":"ít-s-t","meaning":"phía Đông","type":"n","level":"a2"},
+{"word":"West","phonetic":"uét-s-t","meaning":"phía Tây","type":"n","level":"a2"},
+{"word":"North","phonetic":"not-th","meaning":"phía Bắc","type":"n","level":"a2"},
+{"word":"South","phonetic":"sao-th","meaning":"phía Nam","type":"n","level":"a2"},
+{"word":"lunchtime","phonetic":"lăn-ch-tham","meaning":"giờ ăn trưa","type":"n","level":"a2"},
+{"word":"rest","phonetic":"rét-s-t","meaning":"nghỉ ngơi","type":"n","level":"a2"},
+{"word":"game","phonetic":"ghêm","meaning":"trò chơi","type":"n","level":"a1"},
+{"word":"police","phonetic":"pơ-lít-s","meaning":"cảnh sát","type":"n","level":"a2"},
+{"word":"bicycle","phonetic":"bai-xi-cồ","meaning":"xe đạp","type":"n","level":"a1"},
+{"word":"yard","phonetic":"gia-đ","meaning":"sân","type":"n","level":"a2"},
+{"word":"gate","phonetic":"ghết","meaning":"cổng","type":"n","level":"a2"},
+{"word":"topic","phonetic":"tóp-píc","meaning":"chủ đề","type":"n","level":"a2"},
+{"word":"part","phonetic":"pát","meaning":"phần","type":"n","level":"a1"}
+];
+
+(function(){
+"use strict";
+var STORAGE_KEY="vocab_quiz_learned_v2";
+var ttsSupported=('speechSynthesis' in window);
+var currentUtterance=null;
+var isSpeaking=false;
+var currentFilter="all";
+var speakSpeed=0.85;
+
+function loadLearned(){try{var r=localStorage.getItem(STORAGE_KEY);return r?JSON.parse(r):[];}catch(e){return[];}}
+function saveLearned(arr){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(arr));}catch(e){}}
+
+var learnedWords=loadLearned();
+var currentWord=null;
+var answered=false;
+
+var quizArea=document.getElementById("quizArea");
+var statTotal=document.getElementById("statTotal");
+var statLearned=document.getElementById("statLearned");
+var statRemaining=document.getElementById("statRemaining");
+var progressFill=document.getElementById("progressFill");
+var resetBtn=document.getElementById("resetBtn");
+
+var TYPE_META={
+  v:{label:"v.",cls:"wtt-v",full:"Động từ"},
+  n:{label:"n.",cls:"wtt-n",full:"Danh từ"},
+  adj:{label:"adj.",cls:"wtt-adj",full:"Tính từ"},
+  adv:{label:"adv.",cls:"wtt-adv",full:"Trạng từ"},
+  phrase:{label:"phrase.",cls:"wtt-phrase",full:"Cụm từ"},
+  pron:{label:"pron.",cls:"wtt-pron",full:"Đại từ"},
+  prep:{label:"prep.",cls:"wtt-prep",full:"Giới từ"},
+  conj:{label:"conj.",cls:"wtt-conj",full:"Liên từ"},
+  num:{label:"num.",cls:"wtt-num",full:"Số từ"}
+};
+
+function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+function getFiltered(){
+  if(currentFilter==="all") return VOCAB_DATA;
+  return VOCAB_DATA.filter(function(item){return item.type===currentFilter;});
+}
+function getUnlearned(){
+  var filtered=getFiltered();
+  return filtered.filter(function(item){return learnedWords.indexOf(item.word)===-1;});
+}
+
+function updateStats(){
+  var filtered=getFiltered();
+  var total=filtered.length;
+  var learnedCount=filtered.filter(function(item){return learnedWords.indexOf(item.word)!==-1;}).length;
+  statTotal.textContent=total;
+  statLearned.textContent=learnedCount;
+  statRemaining.textContent=total-learnedCount;
+  progressFill.style.width=(total===0?0:Math.round((learnedCount/total)*100))+"%";
+}
+
+function buildOptions(correctItem){
+  var pool=VOCAB_DATA.filter(function(item){return item.word!==correctItem.word;});
+  var wrong=shuffle(pool).slice(0,3);
+  var opts=wrong.map(function(item){return{meaning:item.meaning,isCorrect:false};});
+  opts.push({meaning:correctItem.meaning,isCorrect:true});
+  return shuffle(opts);
+}
+
+function escHtml(str){var d=document.createElement('div');d.textContent=str;return d.innerHTML;}
+
+function typeBadge(type){
+  var m=TYPE_META[type]||{label:type+".",cls:"wtt-n",full:type};
+  return '<span class="word-type-tag '+m.cls+'">'+m.label+' '+m.full+'</span>';
+}
+function levelBadge(level){
+  var cls=level==='a2'?'lvl-a2':'lvl-a1';
+  return '<span class="level-badge '+cls+'">'+level.toUpperCase()+'</span>';
+}
+
+function speakWord(word,btn){
+  if(!ttsSupported) return;
+  window.speechSynthesis.cancel();
+  if(isSpeaking&&currentUtterance&&currentUtterance._word===word){isSpeaking=false;if(btn)btn.classList.remove('speaking');return;}
+  var utter=new SpeechSynthesisUtterance(word);
+  utter._word=word;utter.lang='en-US';utter.rate=speakSpeed;utter.pitch=1;
+  var voices=window.speechSynthesis.getVoices();
+  var v=voices.find(function(v){return v.lang.indexOf('en')===0&&v.name.indexOf('Google')===-1;})||voices.find(function(v){return v.lang.indexOf('en')===0;});
+  if(v) utter.voice=v;
+  utter.onstart=function(){isSpeaking=true;if(btn)btn.classList.add('speaking');};
+  utter.onend=function(){isSpeaking=false;if(btn)btn.classList.remove('speaking');};
+  utter.onerror=function(){isSpeaking=false;if(btn)btn.classList.remove('speaking');};
+  currentUtterance=utter;
+  window.speechSynthesis.speak(utter);
+}
+
+function renderComplete(){
+  quizArea.innerHTML='<div class="quiz-card complete-card"><div class="emoji">🎉</div><h2>Chúc mừng bạn!</h2><p>Bạn đã học xong toàn bộ từ trong bộ lọc hiện tại!</p></div>';
+}
+
+function renderEmpty(){
+  quizArea.innerHTML='<div class="quiz-card empty-filter"><p>Bộ lọc này chưa có từ nào!</p></div>';
+}
+
+function renderQuestion(){
+  var unlearned=getUnlearned();
+  if(getFiltered().length===0){renderEmpty();return;}
+  if(unlearned.length===0){renderComplete();return;}
+  currentWord=unlearned[Math.floor(Math.random()*unlearned.length)];
+  answered=false;
+  var options=buildOptions(currentWord);
+  var letters=["A","B","C","D"];
+  var speedHtml='<option value="0.6">Chậm</option><option value="0.85" selected>Bình thường</option><option value="1.1">Nhanh</option>';
+
+  var html='<div class="quiz-card">';
+  html+='<div class="question-eyebrow"><span class="dot"></span>Chọn nghĩa đúng của từ</div>';
+  html+='<div style="text-align:center;">'+typeBadge(currentWord.type)+levelBadge(currentWord.level)+'</div>';
+  html+='<div class="word-display"><div class="en-word">'+escHtml(currentWord.word)+'</div>';
+  html+='<div class="phonetic">/ '+escHtml(currentWord.phonetic)+' /</div></div>';
+
+  if(ttsSupported){
+    html+='<div class="speak-wrap"><button type="button" class="speak-btn" id="speakBtn">';
+    html+='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>';
+    html+='Nghe phát âm</button></div>';
+    html+='<div class="speed-wrap"><span class="speed-label">Tốc độ:</span><select class="speed-select" id="speedSelect">'+speedHtml+'</select></div>';
+  }
+
+  html+='<div class="options" id="optionsWrap">';
+  options.forEach(function(opt,idx){
+    html+='<button type="button" class="option-btn" data-correct="'+opt.isCorrect+'"><span class="letter">'+letters[idx]+'</span><span>'+escHtml(opt.meaning)+'</span></button>';
+  });
+  html+='</div>';
+  html+='<div class="feedback-row" id="feedbackRow"></div>';
+  html+='<button type="button" class="next-btn" id="nextBtn">Câu tiếp theo →</button>';
+  html+='</div>';
+
+  quizArea.innerHTML=html;
+
+  var speakBtn=document.getElementById('speakBtn');
+  if(speakBtn){
+    speakBtn.addEventListener('click',function(){speakWord(currentWord.word,speakBtn);});
+    setTimeout(function(){speakWord(currentWord.word,speakBtn);},300);
+  }
+  var speedSel=document.getElementById('speedSelect');
+  if(speedSel) speedSel.addEventListener('change',function(){speakSpeed=parseFloat(this.value);});
+
+  var optBtns=quizArea.querySelectorAll('.option-btn');
+  optBtns.forEach(function(btn){btn.addEventListener('click',function(){handleAnswer(btn,optBtns);});});
+
+  document.getElementById('nextBtn').addEventListener('click',function(){
+    if(window.speechSynthesis) window.speechSynthesis.cancel();
+    isSpeaking=false;
+    renderQuestion();window.scrollTo({top:0,behavior:'smooth'});
+  });
+}
+
+function handleAnswer(clicked,all){
+  if(answered) return;
+  answered=true;
+  var isCorrect=clicked.getAttribute('data-correct')==='true';
+  all.forEach(function(btn){btn.disabled=true;if(btn.getAttribute('data-correct')==='true') btn.classList.add('correct');});
+  if(!isCorrect) clicked.classList.add('wrong');
+  var fr=document.getElementById('feedbackRow');
+  var nb=document.getElementById('nextBtn');
+  if(isCorrect){
+    fr.textContent='✓ Chính xác! Bạn đã học từ này.';fr.classList.add('show','is-correct');
+    if(learnedWords.indexOf(currentWord.word)===-1){learnedWords.push(currentWord.word);saveLearned(learnedWords);}
+  } else {
+    fr.textContent='✗ Sai rồi! Đáp án đúng là: '+currentWord.meaning;fr.classList.add('show','is-wrong');
+    var sb=document.getElementById('speakBtn');
+    if(sb) setTimeout(function(){speakWord(currentWord.word,sb);},600);
+  }
+  updateStats();nb.classList.add('show');
+}
+
+document.getElementById('filterBtns').addEventListener('click',function(e){
+  var btn=e.target.closest('.flt-btn');
+  if(!btn) return;
+  document.querySelectorAll('.flt-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  currentFilter=btn.getAttribute('data-type');
+  if(window.speechSynthesis) window.speechSynthesis.cancel();
+  isSpeaking=false;
+  updateStats();renderQuestion();window.scrollTo({top:0,behavior:'smooth'});
+});
+
+resetBtn.addEventListener('click',function(){
+  if(!window.confirm('Xoá toàn bộ tiến độ và làm lại từ đầu?')) return;
+  learnedWords=[];saveLearned(learnedWords);updateStats();renderQuestion();
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+if(ttsSupported){
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged=function(){window.speechSynthesis.getVoices();};
+}
+
+updateStats();renderQuestion();
+})();
+
+</script>
+</body>
+</html>
